@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "168879507080",
+    "project_id": "quickcard-6f695",
+    "storage_bucket": "quickcard-6f695.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:168879507080:android:c83d2e1ce6c2a71c1b013d",
+        "android_client_info": {
+          "package_name": "com.panga.quickcard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "168879507080-vp9aokisfkk95scat4qprn1j41ma7b52.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.panga.quickcard",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "168879507080-vkc5jln5u73e5b5rr1e1jcio0efaml1b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALK1cHctCZH21uGE3fiWKZIZA7DDz7PZ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "168879507080-vkc5jln5u73e5b5rr1e1jcio0efaml1b.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "168879507080-pmefq02md7928c6nkv2or1vjnfhoqepd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.panga.quickcard"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
