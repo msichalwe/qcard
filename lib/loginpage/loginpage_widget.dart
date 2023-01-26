@@ -1,7 +1,10 @@
+import '../auth/auth_util.dart';
+import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -185,8 +188,19 @@ class _LoginpageWidgetState extends State<LoginpageWidget> {
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                         child: FFButtonWidget(
-                          onPressed: () {
-                            print('Button pressed ...');
+                          onPressed: () async {
+                            GoRouter.of(context).prepareAuthEvent();
+                            final user = await signInWithFacebook(context);
+                            if (user == null) {
+                              return;
+                            }
+
+                            final usersUpdateData = createUsersRecordData(
+                              photoUrl: currentUserPhoto,
+                            );
+                            await currentUserReference!.update(usersUpdateData);
+
+                            context.goNamedAuth('homepage', mounted);
                           },
                           text: 'Login with Facebook',
                           icon: FaIcon(
