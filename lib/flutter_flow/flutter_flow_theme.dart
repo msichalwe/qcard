@@ -50,6 +50,15 @@ abstract class FlutterFlowTheme {
 
   late Color primaryBtnText;
   late Color lineColor;
+  late Color primary20;
+  late Color secondary20;
+  late Color tertiary20;
+  late Color alternate20;
+  late Color overlay;
+  late Color overlay0;
+  late Color overlay30;
+  late Color alternateTwo;
+  late Color alternateTwo20;
 
   String get title1Family => typography.title1Family;
   TextStyle get title1 => typography.title1;
@@ -96,6 +105,15 @@ class LightModeTheme extends FlutterFlowTheme {
 
   late Color primaryBtnText = Color(0xFFFFFFFF);
   late Color lineColor = Color(0xFFE0E3E7);
+  late Color primary20 = Color(0x33897DEE);
+  late Color secondary20 = Color(0x3331BFAE);
+  late Color tertiary20 = Color(0x33F3A743);
+  late Color alternate20 = Color(0x34FF5963);
+  late Color overlay = Color(0xB3FFFFFF);
+  late Color overlay0 = Color(0x00FFFFFF);
+  late Color overlay30 = Color(0x4CFFFFFF);
+  late Color alternateTwo = Color(0xFF3A5FFF);
+  late Color alternateTwo20 = Color(0x343A5FFF);
 }
 
 abstract class Typography {
@@ -295,6 +313,15 @@ class DarkModeTheme extends FlutterFlowTheme {
 
   late Color primaryBtnText = Color(0xFFFFFFFF);
   late Color lineColor = Color(0xFF22282F);
+  late Color primary20 = Color(0x33897DEE);
+  late Color secondary20 = Color(0x3331BFAE);
+  late Color tertiary20 = Color(0x33F3A743);
+  late Color alternate20 = Color(0x34FF5963);
+  late Color overlay = Color(0x9818171E);
+  late Color overlay0 = Color(0x0023202E);
+  late Color overlay30 = Color(0x4C23202E);
+  late Color alternateTwo = Color(0xFF3A5FFF);
+  late Color alternateTwo20 = Color(0x343A5FFF);
 }
 
 extension TextStyleHelper on TextStyle {
