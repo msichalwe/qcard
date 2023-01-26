@@ -42,13 +42,6 @@ class _$QrCodesRecordSerializer implements StructuredSerializer<QrCodesRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(DateTime)));
     }
-    value = object.name;
-    if (value != null) {
-      result
-        ..add('name')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -86,10 +79,6 @@ class _$QrCodesRecordSerializer implements StructuredSerializer<QrCodesRecord> {
           result.createdAt = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime?;
           break;
-        case 'name':
-          result.name = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String?;
-          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -111,15 +100,12 @@ class _$QrCodesRecord extends QrCodesRecord {
   @override
   final DateTime? createdAt;
   @override
-  final String? name;
-  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$QrCodesRecord([void Function(QrCodesRecordBuilder)? updates]) =>
       (new QrCodesRecordBuilder()..update(updates))._build();
 
-  _$QrCodesRecord._(
-      {this.userID, this.data, this.createdAt, this.name, this.ffRef})
+  _$QrCodesRecord._({this.userID, this.data, this.createdAt, this.ffRef})
       : super._();
 
   @override
@@ -136,17 +122,13 @@ class _$QrCodesRecord extends QrCodesRecord {
         userID == other.userID &&
         data == other.data &&
         createdAt == other.createdAt &&
-        name == other.name &&
         ffRef == other.ffRef;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc(
-            $jc($jc($jc(0, userID.hashCode), data.hashCode),
-                createdAt.hashCode),
-            name.hashCode),
+        $jc($jc($jc(0, userID.hashCode), data.hashCode), createdAt.hashCode),
         ffRef.hashCode));
   }
 
@@ -156,7 +138,6 @@ class _$QrCodesRecord extends QrCodesRecord {
           ..add('userID', userID)
           ..add('data', data)
           ..add('createdAt', createdAt)
-          ..add('name', name)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -178,10 +159,6 @@ class QrCodesRecordBuilder
   DateTime? get createdAt => _$this._createdAt;
   set createdAt(DateTime? createdAt) => _$this._createdAt = createdAt;
 
-  String? _name;
-  String? get name => _$this._name;
-  set name(String? name) => _$this._name = name;
-
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -196,7 +173,6 @@ class QrCodesRecordBuilder
       _userID = $v.userID;
       _data = $v.data;
       _createdAt = $v.createdAt;
-      _name = $v.name;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -220,11 +196,7 @@ class QrCodesRecordBuilder
   _$QrCodesRecord _build() {
     final _$result = _$v ??
         new _$QrCodesRecord._(
-            userID: userID,
-            data: data,
-            createdAt: createdAt,
-            name: name,
-            ffRef: ffRef);
+            userID: userID, data: data, createdAt: createdAt, ffRef: ffRef);
     replace(_$result);
     return _$result;
   }
