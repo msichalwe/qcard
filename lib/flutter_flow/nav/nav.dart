@@ -79,15 +79,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               appStateNotifier.loggedIn ? HomepageWidget() : LoginpageWidget(),
           routes: [
             FFRoute(
-              name: 'loginpage',
-              path: 'loginpage',
-              builder: (context, params) => LoginpageWidget(),
-            ),
-            FFRoute(
               name: 'homepage',
               path: 'homepage',
               requireAuth: true,
               builder: (context, params) => HomepageWidget(),
+            ),
+            FFRoute(
+              name: 'loginpage',
+              path: 'loginpage',
+              builder: (context, params) => LoginpageWidget(),
             ),
             FFRoute(
               name: 'contacts',
@@ -112,6 +112,22 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'account',
               requireAuth: true,
               builder: (context, params) => AccountWidget(),
+            ),
+            FFRoute(
+              name: 'scans',
+              path: 'scans',
+              requireAuth: true,
+              builder: (context, params) => ScansWidget(),
+            ),
+            FFRoute(
+              name: 'profilepage_main',
+              path: 'profilepageMain',
+              requireAuth: true,
+              builder: (context, params) => ProfilepageMainWidget(
+                userId: params.getParam(
+                    'userId', ParamType.DocumentReference, false, ['users']),
+                usermainId: params.getParam('usermainId', ParamType.String),
+              ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),

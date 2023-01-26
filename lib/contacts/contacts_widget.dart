@@ -166,7 +166,7 @@ class _ContactsWidgetState extends State<ContactsWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .bodyText1
                                     .override(
-                                      fontFamily: 'Clash Display',
+                                      fontFamily: 'Nunito',
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryBackground,
                                       fontSize: 14,

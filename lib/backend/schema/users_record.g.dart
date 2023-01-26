@@ -92,6 +92,34 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
                   DocumentReference, const [const FullType.nullable(Object)])
             ])));
     }
+    value = object.instagram;
+    if (value != null) {
+      result
+        ..add('instagram')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.facebook;
+    if (value != null) {
+      result
+        ..add('facebook')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.whatsappChat;
+    if (value != null) {
+      result
+        ..add('whatsapp_chat')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.abount;
+    if (value != null) {
+      result
+        ..add('abount')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -157,6 +185,22 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
                     DocumentReference, const [const FullType.nullable(Object)])
               ]))! as BuiltList<Object?>);
           break;
+        case 'instagram':
+          result.instagram = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'facebook':
+          result.facebook = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'whatsapp_chat':
+          result.whatsappChat = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'abount':
+          result.abount = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -192,6 +236,14 @@ class _$UsersRecord extends UsersRecord {
   @override
   final BuiltList<DocumentReference<Object?>>? qrCodes;
   @override
+  final String? instagram;
+  @override
+  final String? facebook;
+  @override
+  final String? whatsappChat;
+  @override
+  final String? abount;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$UsersRecord([void Function(UsersRecordBuilder)? updates]) =>
@@ -208,6 +260,10 @@ class _$UsersRecord extends UsersRecord {
       this.lastName,
       this.social,
       this.qrCodes,
+      this.instagram,
+      this.facebook,
+      this.whatsappChat,
+      this.abount,
       this.ffRef})
       : super._();
 
@@ -232,6 +288,10 @@ class _$UsersRecord extends UsersRecord {
         lastName == other.lastName &&
         social == other.social &&
         qrCodes == other.qrCodes &&
+        instagram == other.instagram &&
+        facebook == other.facebook &&
+        whatsappChat == other.whatsappChat &&
+        abount == other.abount &&
         ffRef == other.ffRef;
   }
 
@@ -246,16 +306,27 @@ class _$UsersRecord extends UsersRecord {
                             $jc(
                                 $jc(
                                     $jc(
-                                        $jc($jc(0, email.hashCode),
-                                            displayName.hashCode),
-                                        photoUrl.hashCode),
-                                    uid.hashCode),
-                                createdTime.hashCode),
-                            phoneNumber.hashCode),
-                        firstName.hashCode),
-                    lastName.hashCode),
-                social.hashCode),
-            qrCodes.hashCode),
+                                        $jc(
+                                            $jc(
+                                                $jc(
+                                                    $jc(
+                                                        $jc(
+                                                            $jc(0,
+                                                                email.hashCode),
+                                                            displayName
+                                                                .hashCode),
+                                                        photoUrl.hashCode),
+                                                    uid.hashCode),
+                                                createdTime.hashCode),
+                                            phoneNumber.hashCode),
+                                        firstName.hashCode),
+                                    lastName.hashCode),
+                                social.hashCode),
+                            qrCodes.hashCode),
+                        instagram.hashCode),
+                    facebook.hashCode),
+                whatsappChat.hashCode),
+            abount.hashCode),
         ffRef.hashCode));
   }
 
@@ -272,6 +343,10 @@ class _$UsersRecord extends UsersRecord {
           ..add('lastName', lastName)
           ..add('social', social)
           ..add('qrCodes', qrCodes)
+          ..add('instagram', instagram)
+          ..add('facebook', facebook)
+          ..add('whatsappChat', whatsappChat)
+          ..add('abount', abount)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -322,6 +397,22 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
   set qrCodes(ListBuilder<DocumentReference<Object?>>? qrCodes) =>
       _$this._qrCodes = qrCodes;
 
+  String? _instagram;
+  String? get instagram => _$this._instagram;
+  set instagram(String? instagram) => _$this._instagram = instagram;
+
+  String? _facebook;
+  String? get facebook => _$this._facebook;
+  set facebook(String? facebook) => _$this._facebook = facebook;
+
+  String? _whatsappChat;
+  String? get whatsappChat => _$this._whatsappChat;
+  set whatsappChat(String? whatsappChat) => _$this._whatsappChat = whatsappChat;
+
+  String? _abount;
+  String? get abount => _$this._abount;
+  set abount(String? abount) => _$this._abount = abount;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -343,6 +434,10 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
       _lastName = $v.lastName;
       _social = $v.social;
       _qrCodes = $v.qrCodes?.toBuilder();
+      _instagram = $v.instagram;
+      _facebook = $v.facebook;
+      _whatsappChat = $v.whatsappChat;
+      _abount = $v.abount;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -378,6 +473,10 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
               lastName: lastName,
               social: social,
               qrCodes: _qrCodes?.build(),
+              instagram: instagram,
+              facebook: facebook,
+              whatsappChat: whatsappChat,
+              abount: abount,
               ffRef: ffRef);
     } catch (_) {
       late String _$failedField;

@@ -39,7 +39,7 @@ class _HomepageWidgetState extends State<HomepageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Color(0xFF4C3FB5),
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
           // This action takes us to the barcode scanning page and then sends us to the specific user that was scanned
@@ -48,6 +48,16 @@ class _HomepageWidgetState extends State<HomepageWidget> {
             'Cancel Scan', // cancel button text
             true, // whether to show the flash icon
             ScanMode.BARCODE,
+          );
+
+          context.pushNamed(
+            'profilepage_main',
+            queryParams: {
+              'usermainId': serializeParam(
+                userData,
+                ParamType.String,
+              ),
+            }.withoutNulls,
           );
 
           setState(() {});
@@ -75,7 +85,9 @@ class _HomepageWidgetState extends State<HomepageWidget> {
           child: Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height * 1,
-            decoration: BoxDecoration(),
+            decoration: BoxDecoration(
+              color: Color(0xFF4C3FB5),
+            ),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -139,23 +151,6 @@ class _HomepageWidgetState extends State<HomepageWidget> {
                                                               .bodyText1Family),
                                             ),
                                       ),
-                                    ),
-                                    Text(
-                                      'yonasichalwe@gmail.com',
-                                      textAlign: TextAlign.start,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText1Family,
-                                            color: Color(0xDBF1F4F8),
-                                            fontSize: 10,
-                                            useGoogleFonts: GoogleFonts.asMap()
-                                                .containsKey(
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1Family),
-                                          ),
                                     ),
                                     Text(
                                       'Scan my qr code below to get my contact info',
@@ -468,62 +463,71 @@ class _HomepageWidgetState extends State<HomepageWidget> {
                               child: Padding(
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      width: 65,
-                                      height: 65,
-                                      decoration: BoxDecoration(
-                                        color: Color(0xFF4C3FB5),
-                                        borderRadius: BorderRadius.circular(20),
+                                child: InkWell(
+                                  onTap: () async {
+                                    context.pushNamed('account');
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        width: 65,
+                                        height: 65,
+                                        decoration: BoxDecoration(
+                                          color: Color(0xFF4C3FB5),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+                                        child: Icon(
+                                          Icons.settings_rounded,
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                          size: 40,
+                                        ),
                                       ),
-                                      child: Icon(
-                                        Icons.settings_rounded,
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        size: 40,
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            25, 0, 0, 0),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Account',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1Family,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                        fontSize: 20,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1Family),
+                                                      ),
+                                            ),
+                                            Text(
+                                              'edit your informtion and card settings',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1,
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          25, 0, 0, 0),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Account',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1
-                                                .override(
-                                                  fontFamily:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyText1Family,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                  fontSize: 20,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1Family),
-                                                ),
-                                          ),
-                                          Text(
-                                            'edit your informtion and card settings',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
