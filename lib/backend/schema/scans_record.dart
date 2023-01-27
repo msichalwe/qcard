@@ -9,17 +9,29 @@ part 'scans_record.g.dart';
 abstract class ScansRecord implements Built<ScansRecord, ScansRecordBuilder> {
   static Serializer<ScansRecord> get serializer => _$scansRecordSerializer;
 
-  DocumentReference? get qrCodeId;
-
   DocumentReference? get scannedBy;
 
   DateTime? get scannedAt;
+
+  String? get scanedUserId;
+
+  String? get metaData;
+
+  String? get userName;
+
+  String? get userImage;
+
+  DocumentReference? get user;
 
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
 
-  static void _initializeBuilder(ScansRecordBuilder builder) => builder;
+  static void _initializeBuilder(ScansRecordBuilder builder) => builder
+    ..scanedUserId = ''
+    ..metaData = ''
+    ..userName = ''
+    ..userImage = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('scans');
@@ -43,17 +55,25 @@ abstract class ScansRecord implements Built<ScansRecord, ScansRecordBuilder> {
 }
 
 Map<String, dynamic> createScansRecordData({
-  DocumentReference? qrCodeId,
   DocumentReference? scannedBy,
   DateTime? scannedAt,
+  String? scanedUserId,
+  String? metaData,
+  String? userName,
+  String? userImage,
+  DocumentReference? user,
 }) {
   final firestoreData = serializers.toFirestore(
     ScansRecord.serializer,
     ScansRecord(
       (s) => s
-        ..qrCodeId = qrCodeId
         ..scannedBy = scannedBy
-        ..scannedAt = scannedAt,
+        ..scannedAt = scannedAt
+        ..scanedUserId = scanedUserId
+        ..metaData = metaData
+        ..userName = userName
+        ..userImage = userImage
+        ..user = user,
     ),
   );
 

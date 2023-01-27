@@ -19,14 +19,6 @@ class _$ScansRecordSerializer implements StructuredSerializer<ScansRecord> {
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object?>[];
     Object? value;
-    value = object.qrCodeId;
-    if (value != null) {
-      result
-        ..add('qrCodeId')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(
-                DocumentReference, const [const FullType.nullable(Object)])));
-    }
     value = object.scannedBy;
     if (value != null) {
       result
@@ -41,6 +33,42 @@ class _$ScansRecordSerializer implements StructuredSerializer<ScansRecord> {
         ..add('scannedAt')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(DateTime)));
+    }
+    value = object.scanedUserId;
+    if (value != null) {
+      result
+        ..add('scanedUserId')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.metaData;
+    if (value != null) {
+      result
+        ..add('metaData')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.userName;
+    if (value != null) {
+      result
+        ..add('userName')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.userImage;
+    if (value != null) {
+      result
+        ..add('userImage')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.user;
+    if (value != null) {
+      result
+        ..add('user')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     value = object.ffRef;
     if (value != null) {
@@ -64,12 +92,6 @@ class _$ScansRecordSerializer implements StructuredSerializer<ScansRecord> {
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
-        case 'qrCodeId':
-          result.qrCodeId = serializers.deserialize(value,
-              specifiedType: const FullType(DocumentReference, const [
-                const FullType.nullable(Object)
-              ])) as DocumentReference<Object?>?;
-          break;
         case 'scannedBy':
           result.scannedBy = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -79,6 +101,28 @@ class _$ScansRecordSerializer implements StructuredSerializer<ScansRecord> {
         case 'scannedAt':
           result.scannedAt = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime?;
+          break;
+        case 'scanedUserId':
+          result.scanedUserId = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'metaData':
+          result.metaData = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'userName':
+          result.userName = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'userImage':
+          result.userImage = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'user':
+          result.user = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
@@ -95,18 +139,34 @@ class _$ScansRecordSerializer implements StructuredSerializer<ScansRecord> {
 
 class _$ScansRecord extends ScansRecord {
   @override
-  final DocumentReference<Object?>? qrCodeId;
-  @override
   final DocumentReference<Object?>? scannedBy;
   @override
   final DateTime? scannedAt;
+  @override
+  final String? scanedUserId;
+  @override
+  final String? metaData;
+  @override
+  final String? userName;
+  @override
+  final String? userImage;
+  @override
+  final DocumentReference<Object?>? user;
   @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$ScansRecord([void Function(ScansRecordBuilder)? updates]) =>
       (new ScansRecordBuilder()..update(updates))._build();
 
-  _$ScansRecord._({this.qrCodeId, this.scannedBy, this.scannedAt, this.ffRef})
+  _$ScansRecord._(
+      {this.scannedBy,
+      this.scannedAt,
+      this.scanedUserId,
+      this.metaData,
+      this.userName,
+      this.userImage,
+      this.user,
+      this.ffRef})
       : super._();
 
   @override
@@ -120,26 +180,42 @@ class _$ScansRecord extends ScansRecord {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is ScansRecord &&
-        qrCodeId == other.qrCodeId &&
         scannedBy == other.scannedBy &&
         scannedAt == other.scannedAt &&
+        scanedUserId == other.scanedUserId &&
+        metaData == other.metaData &&
+        userName == other.userName &&
+        userImage == other.userImage &&
+        user == other.user &&
         ffRef == other.ffRef;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, qrCodeId.hashCode), scannedBy.hashCode),
-            scannedAt.hashCode),
+        $jc(
+            $jc(
+                $jc(
+                    $jc(
+                        $jc($jc($jc(0, scannedBy.hashCode), scannedAt.hashCode),
+                            scanedUserId.hashCode),
+                        metaData.hashCode),
+                    userName.hashCode),
+                userImage.hashCode),
+            user.hashCode),
         ffRef.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'ScansRecord')
-          ..add('qrCodeId', qrCodeId)
           ..add('scannedBy', scannedBy)
           ..add('scannedAt', scannedAt)
+          ..add('scanedUserId', scanedUserId)
+          ..add('metaData', metaData)
+          ..add('userName', userName)
+          ..add('userImage', userImage)
+          ..add('user', user)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -147,11 +223,6 @@ class _$ScansRecord extends ScansRecord {
 
 class ScansRecordBuilder implements Builder<ScansRecord, ScansRecordBuilder> {
   _$ScansRecord? _$v;
-
-  DocumentReference<Object?>? _qrCodeId;
-  DocumentReference<Object?>? get qrCodeId => _$this._qrCodeId;
-  set qrCodeId(DocumentReference<Object?>? qrCodeId) =>
-      _$this._qrCodeId = qrCodeId;
 
   DocumentReference<Object?>? _scannedBy;
   DocumentReference<Object?>? get scannedBy => _$this._scannedBy;
@@ -161,6 +232,26 @@ class ScansRecordBuilder implements Builder<ScansRecord, ScansRecordBuilder> {
   DateTime? _scannedAt;
   DateTime? get scannedAt => _$this._scannedAt;
   set scannedAt(DateTime? scannedAt) => _$this._scannedAt = scannedAt;
+
+  String? _scanedUserId;
+  String? get scanedUserId => _$this._scanedUserId;
+  set scanedUserId(String? scanedUserId) => _$this._scanedUserId = scanedUserId;
+
+  String? _metaData;
+  String? get metaData => _$this._metaData;
+  set metaData(String? metaData) => _$this._metaData = metaData;
+
+  String? _userName;
+  String? get userName => _$this._userName;
+  set userName(String? userName) => _$this._userName = userName;
+
+  String? _userImage;
+  String? get userImage => _$this._userImage;
+  set userImage(String? userImage) => _$this._userImage = userImage;
+
+  DocumentReference<Object?>? _user;
+  DocumentReference<Object?>? get user => _$this._user;
+  set user(DocumentReference<Object?>? user) => _$this._user = user;
 
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
@@ -173,9 +264,13 @@ class ScansRecordBuilder implements Builder<ScansRecord, ScansRecordBuilder> {
   ScansRecordBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _qrCodeId = $v.qrCodeId;
       _scannedBy = $v.scannedBy;
       _scannedAt = $v.scannedAt;
+      _scanedUserId = $v.scanedUserId;
+      _metaData = $v.metaData;
+      _userName = $v.userName;
+      _userImage = $v.userImage;
+      _user = $v.user;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -199,9 +294,13 @@ class ScansRecordBuilder implements Builder<ScansRecord, ScansRecordBuilder> {
   _$ScansRecord _build() {
     final _$result = _$v ??
         new _$ScansRecord._(
-            qrCodeId: qrCodeId,
             scannedBy: scannedBy,
             scannedAt: scannedAt,
+            scanedUserId: scanedUserId,
+            metaData: metaData,
+            userName: userName,
+            userImage: userImage,
+            user: user,
             ffRef: ffRef);
     replace(_$result);
     return _$result;
