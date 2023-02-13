@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'account_model.dart';
+export 'account_model.dart';
 
 class AccountWidget extends StatefulWidget {
   const AccountWidget({Key? key}) : super(key: key);
@@ -14,13 +17,23 @@ class AccountWidget extends StatefulWidget {
 }
 
 class _AccountWidgetState extends State<AccountWidget> {
+  late AccountModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => AccountModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
   }
 
   @override

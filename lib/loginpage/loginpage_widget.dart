@@ -9,6 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'loginpage_model.dart';
+export 'loginpage_model.dart';
 
 class LoginpageWidget extends StatefulWidget {
   const LoginpageWidget({Key? key}) : super(key: key);
@@ -18,18 +21,23 @@ class LoginpageWidget extends StatefulWidget {
 }
 
 class _LoginpageWidgetState extends State<LoginpageWidget> {
-  final _unfocusNode = FocusNode();
+  late LoginpageModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => LoginpageModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
   void dispose() {
+    _model.dispose();
+
     _unfocusNode.dispose();
     super.dispose();
   }

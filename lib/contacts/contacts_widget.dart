@@ -6,6 +6,9 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'contacts_model.dart';
+export 'contacts_model.dart';
 
 class ContactsWidget extends StatefulWidget {
   const ContactsWidget({Key? key}) : super(key: key);
@@ -15,21 +18,25 @@ class ContactsWidget extends StatefulWidget {
 }
 
 class _ContactsWidgetState extends State<ContactsWidget> {
-  TextEditingController? textController;
-  final _unfocusNode = FocusNode();
+  late ContactsModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
-    textController = TextEditingController();
+    _model = createModel(context, () => ContactsModel());
+
+    _model.textController = TextEditingController();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
   void dispose() {
+    _model.dispose();
+
     _unfocusNode.dispose();
-    textController?.dispose();
     super.dispose();
   }
 
@@ -115,9 +122,9 @@ class _ContactsWidgetState extends State<ContactsWidget> {
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
                               child: TextFormField(
-                                controller: textController,
+                                controller: _model.textController,
                                 onChanged: (_) => EasyDebounce.debounce(
-                                  'textController',
+                                  '_model.textController',
                                   Duration(milliseconds: 2000),
                                   () => setState(() {}),
                                 ),
@@ -178,6 +185,8 @@ class _ContactsWidgetState extends State<ContactsWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .bodyText1Family),
                                     ),
+                                validator: _model.textControllerValidator
+                                    .asValidator(context),
                               ),
                             ),
                           ),

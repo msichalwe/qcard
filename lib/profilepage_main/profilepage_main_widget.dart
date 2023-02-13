@@ -1,17 +1,19 @@
 import '../backend/backend.dart';
-import '../flutter_flow/flutter_flow_expanded_image_view.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'profilepage_main_model.dart';
+export 'profilepage_main_model.dart';
 
 class ProfilepageMainWidget extends StatefulWidget {
   const ProfilepageMainWidget({
@@ -28,18 +30,23 @@ class ProfilepageMainWidget extends StatefulWidget {
 }
 
 class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget> {
-  final _unfocusNode = FocusNode();
+  late ProfilepageMainModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => ProfilepageMainModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
   void dispose() {
+    _model.dispose();
+
     _unfocusNode.dispose();
     super.dispose();
   }
@@ -88,8 +95,8 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget> {
                 children: [
                   Align(
                     alignment: AlignmentDirectional(0, -1),
-                    child: Image.network(
-                      profilepageMainUsersRecord!.photoUrl!,
+                    child: CachedNetworkImage(
+                      imageUrl: profilepageMainUsersRecord!.photoUrl!,
                       width: double.infinity,
                       height: 500,
                       fit: BoxFit.cover,
@@ -167,7 +174,7 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget> {
                                 ),
                                 onPressed: () async {
                                   await Share.share(
-                                    '',
+                                    'https://quickcardzm.com/share/${profilepageMainUsersRecord!.uid}',
                                     sharePositionOrigin:
                                         getWidgetBoundingBox(context),
                                   );
@@ -292,7 +299,7 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget> {
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0, 12, 0, 0),
                                           child: DefaultTabController(
-                                            length: 3,
+                                            length: 2,
                                             initialIndex: 0,
                                             child: Column(
                                               children: [
@@ -319,9 +326,6 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget> {
                                                     ),
                                                     Tab(
                                                       text: 'About',
-                                                    ),
-                                                    Tab(
-                                                      text: 'Gallery',
                                                     ),
                                                   ],
                                                 ),
@@ -966,460 +970,6 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget> {
                                                                     ),
                                                                   ),
                                                                 ],
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    8, 8, 8, 8),
-                                                        child: GridView(
-                                                          padding:
-                                                              EdgeInsets.zero,
-                                                          gridDelegate:
-                                                              SliverGridDelegateWithFixedCrossAxisCount(
-                                                            crossAxisCount: 3,
-                                                            crossAxisSpacing:
-                                                                10,
-                                                            mainAxisSpacing: 10,
-                                                            childAspectRatio: 1,
-                                                          ),
-                                                          scrollDirection:
-                                                              Axis.vertical,
-                                                          children: [
-                                                            InkWell(
-                                                              onTap: () async {
-                                                                await Navigator
-                                                                    .push(
-                                                                  context,
-                                                                  PageTransition(
-                                                                    type: PageTransitionType
-                                                                        .fade,
-                                                                    child:
-                                                                        FlutterFlowExpandedImageView(
-                                                                      image: Image
-                                                                          .network(
-                                                                        'https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFuZHNjYXBlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-                                                                        fit: BoxFit
-                                                                            .contain,
-                                                                      ),
-                                                                      allowRotation:
-                                                                          false,
-                                                                      tag:
-                                                                          'imageTag4',
-                                                                      useHeroAnimation:
-                                                                          true,
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              },
-                                                              child: Hero(
-                                                                tag:
-                                                                    'imageTag4',
-                                                                transitionOnUserGestures:
-                                                                    true,
-                                                                child:
-                                                                    ClipRRect(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12),
-                                                                  child: Image
-                                                                      .network(
-                                                                    'https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFuZHNjYXBlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-                                                                    width: 100,
-                                                                    height: 100,
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            InkWell(
-                                                              onTap: () async {
-                                                                await Navigator
-                                                                    .push(
-                                                                  context,
-                                                                  PageTransition(
-                                                                    type: PageTransitionType
-                                                                        .fade,
-                                                                    child:
-                                                                        FlutterFlowExpandedImageView(
-                                                                      image: Image
-                                                                          .network(
-                                                                        'https://images.unsplash.com/photo-1511884642898-4c92249e20b6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bGFuZHNjYXBlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-                                                                        fit: BoxFit
-                                                                            .contain,
-                                                                      ),
-                                                                      allowRotation:
-                                                                          false,
-                                                                      tag:
-                                                                          'imageTag5',
-                                                                      useHeroAnimation:
-                                                                          true,
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              },
-                                                              child: Hero(
-                                                                tag:
-                                                                    'imageTag5',
-                                                                transitionOnUserGestures:
-                                                                    true,
-                                                                child:
-                                                                    ClipRRect(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12),
-                                                                  child: Image
-                                                                      .network(
-                                                                    'https://images.unsplash.com/photo-1511884642898-4c92249e20b6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bGFuZHNjYXBlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-                                                                    width: 100,
-                                                                    height: 100,
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            InkWell(
-                                                              onTap: () async {
-                                                                await Navigator
-                                                                    .push(
-                                                                  context,
-                                                                  PageTransition(
-                                                                    type: PageTransitionType
-                                                                        .fade,
-                                                                    child:
-                                                                        FlutterFlowExpandedImageView(
-                                                                      image: Image
-                                                                          .network(
-                                                                        'https://images.unsplash.com/photo-1434725039720-aaad6dd32dfe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8bGFuZHNjYXBlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-                                                                        fit: BoxFit
-                                                                            .contain,
-                                                                      ),
-                                                                      allowRotation:
-                                                                          false,
-                                                                      tag:
-                                                                          'imageTag6',
-                                                                      useHeroAnimation:
-                                                                          true,
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              },
-                                                              child: Hero(
-                                                                tag:
-                                                                    'imageTag6',
-                                                                transitionOnUserGestures:
-                                                                    true,
-                                                                child:
-                                                                    ClipRRect(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12),
-                                                                  child: Image
-                                                                      .network(
-                                                                    'https://images.unsplash.com/photo-1434725039720-aaad6dd32dfe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8bGFuZHNjYXBlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-                                                                    width: 100,
-                                                                    height: 100,
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            InkWell(
-                                                              onTap: () async {
-                                                                await Navigator
-                                                                    .push(
-                                                                  context,
-                                                                  PageTransition(
-                                                                    type: PageTransitionType
-                                                                        .fade,
-                                                                    child:
-                                                                        FlutterFlowExpandedImageView(
-                                                                      image: Image
-                                                                          .network(
-                                                                        'https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8bGFuZHNjYXBlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-                                                                        fit: BoxFit
-                                                                            .contain,
-                                                                      ),
-                                                                      allowRotation:
-                                                                          false,
-                                                                      tag:
-                                                                          'imageTag7',
-                                                                      useHeroAnimation:
-                                                                          true,
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              },
-                                                              child: Hero(
-                                                                tag:
-                                                                    'imageTag7',
-                                                                transitionOnUserGestures:
-                                                                    true,
-                                                                child:
-                                                                    ClipRRect(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12),
-                                                                  child: Image
-                                                                      .network(
-                                                                    'https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8bGFuZHNjYXBlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-                                                                    width: 100,
-                                                                    height: 100,
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            InkWell(
-                                                              onTap: () async {
-                                                                await Navigator
-                                                                    .push(
-                                                                  context,
-                                                                  PageTransition(
-                                                                    type: PageTransitionType
-                                                                        .fade,
-                                                                    child:
-                                                                        FlutterFlowExpandedImageView(
-                                                                      image: Image
-                                                                          .network(
-                                                                        'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8bGFuZHNjYXBlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-                                                                        fit: BoxFit
-                                                                            .contain,
-                                                                      ),
-                                                                      allowRotation:
-                                                                          false,
-                                                                      tag:
-                                                                          'imageTag8',
-                                                                      useHeroAnimation:
-                                                                          true,
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              },
-                                                              child: Hero(
-                                                                tag:
-                                                                    'imageTag8',
-                                                                transitionOnUserGestures:
-                                                                    true,
-                                                                child:
-                                                                    ClipRRect(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12),
-                                                                  child: Image
-                                                                      .network(
-                                                                    'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8bGFuZHNjYXBlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-                                                                    width: 100,
-                                                                    height: 100,
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            InkWell(
-                                                              onTap: () async {
-                                                                await Navigator
-                                                                    .push(
-                                                                  context,
-                                                                  PageTransition(
-                                                                    type: PageTransitionType
-                                                                        .fade,
-                                                                    child:
-                                                                        FlutterFlowExpandedImageView(
-                                                                      image: Image
-                                                                          .network(
-                                                                        'https://images.unsplash.com/photo-1559827291-72ee739d0d9a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGxhbmRzY2FwZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-                                                                        fit: BoxFit
-                                                                            .contain,
-                                                                      ),
-                                                                      allowRotation:
-                                                                          false,
-                                                                      tag:
-                                                                          'imageTag9',
-                                                                      useHeroAnimation:
-                                                                          true,
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              },
-                                                              child: Hero(
-                                                                tag:
-                                                                    'imageTag9',
-                                                                transitionOnUserGestures:
-                                                                    true,
-                                                                child:
-                                                                    ClipRRect(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12),
-                                                                  child: Image
-                                                                      .network(
-                                                                    'https://images.unsplash.com/photo-1559827291-72ee739d0d9a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGxhbmRzY2FwZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-                                                                    width: 100,
-                                                                    height: 100,
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            InkWell(
-                                                              onTap: () async {
-                                                                await Navigator
-                                                                    .push(
-                                                                  context,
-                                                                  PageTransition(
-                                                                    type: PageTransitionType
-                                                                        .fade,
-                                                                    child:
-                                                                        FlutterFlowExpandedImageView(
-                                                                      image: Image
-                                                                          .network(
-                                                                        'https://images.unsplash.com/photo-1459213599465-03ab6a4d5931?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjV8fGxhbmRzY2FwZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-                                                                        fit: BoxFit
-                                                                            .contain,
-                                                                      ),
-                                                                      allowRotation:
-                                                                          false,
-                                                                      tag:
-                                                                          'imageTag10',
-                                                                      useHeroAnimation:
-                                                                          true,
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              },
-                                                              child: Hero(
-                                                                tag:
-                                                                    'imageTag10',
-                                                                transitionOnUserGestures:
-                                                                    true,
-                                                                child:
-                                                                    ClipRRect(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12),
-                                                                  child: Image
-                                                                      .network(
-                                                                    'https://images.unsplash.com/photo-1459213599465-03ab6a4d5931?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjV8fGxhbmRzY2FwZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-                                                                    width: 100,
-                                                                    height: 100,
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            InkWell(
-                                                              onTap: () async {
-                                                                await Navigator
-                                                                    .push(
-                                                                  context,
-                                                                  PageTransition(
-                                                                    type: PageTransitionType
-                                                                        .fade,
-                                                                    child:
-                                                                        FlutterFlowExpandedImageView(
-                                                                      image: Image
-                                                                          .network(
-                                                                        'https://images.unsplash.com/photo-1433477155337-9aea4e790195?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjd8fGxhbmRzY2FwZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-                                                                        fit: BoxFit
-                                                                            .contain,
-                                                                      ),
-                                                                      allowRotation:
-                                                                          false,
-                                                                      tag:
-                                                                          'imageTag11',
-                                                                      useHeroAnimation:
-                                                                          true,
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              },
-                                                              child: Hero(
-                                                                tag:
-                                                                    'imageTag11',
-                                                                transitionOnUserGestures:
-                                                                    true,
-                                                                child:
-                                                                    ClipRRect(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12),
-                                                                  child: Image
-                                                                      .network(
-                                                                    'https://images.unsplash.com/photo-1433477155337-9aea4e790195?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjd8fGxhbmRzY2FwZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-                                                                    width: 100,
-                                                                    height: 100,
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            InkWell(
-                                                              onTap: () async {
-                                                                await Navigator
-                                                                    .push(
-                                                                  context,
-                                                                  PageTransition(
-                                                                    type: PageTransitionType
-                                                                        .fade,
-                                                                    child:
-                                                                        FlutterFlowExpandedImageView(
-                                                                      image: Image
-                                                                          .network(
-                                                                        'https://images.unsplash.com/photo-1435732960391-11053ee5e6b6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjh8fGxhbmRzY2FwZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-                                                                        fit: BoxFit
-                                                                            .contain,
-                                                                      ),
-                                                                      allowRotation:
-                                                                          false,
-                                                                      tag:
-                                                                          'imageTag12',
-                                                                      useHeroAnimation:
-                                                                          true,
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              },
-                                                              child: Hero(
-                                                                tag:
-                                                                    'imageTag12',
-                                                                transitionOnUserGestures:
-                                                                    true,
-                                                                child:
-                                                                    ClipRRect(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12),
-                                                                  child: Image
-                                                                      .network(
-                                                                    'https://images.unsplash.com/photo-1435732960391-11053ee5e6b6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjh8fGxhbmRzY2FwZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-                                                                    width: 100,
-                                                                    height: 100,
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                  ),
-                                                                ),
                                                               ),
                                                             ),
                                                           ],

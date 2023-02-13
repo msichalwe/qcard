@@ -6,6 +6,9 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'scans_model.dart';
+export 'scans_model.dart';
 
 class ScansWidget extends StatefulWidget {
   const ScansWidget({Key? key}) : super(key: key);
@@ -15,21 +18,25 @@ class ScansWidget extends StatefulWidget {
 }
 
 class _ScansWidgetState extends State<ScansWidget> {
-  TextEditingController? textController;
-  final _unfocusNode = FocusNode();
+  late ScansModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
-    textController = TextEditingController();
+    _model = createModel(context, () => ScansModel());
+
+    _model.textController = TextEditingController();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
   void dispose() {
+    _model.dispose();
+
     _unfocusNode.dispose();
-    textController?.dispose();
     super.dispose();
   }
 
@@ -119,9 +126,9 @@ class _ScansWidgetState extends State<ScansWidget> {
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
                                 child: TextFormField(
-                                  controller: textController,
+                                  controller: _model.textController,
                                   onChanged: (_) => EasyDebounce.debounce(
-                                    'textController',
+                                    '_model.textController',
                                     Duration(milliseconds: 2000),
                                     () => setState(() {}),
                                   ),
@@ -182,6 +189,8 @@ class _ScansWidgetState extends State<ScansWidget> {
                                                 FlutterFlowTheme.of(context)
                                                     .bodyText1Family),
                                       ),
+                                  validator: _model.textControllerValidator
+                                      .asValidator(context),
                                 ),
                               ),
                             ),

@@ -4,6 +4,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'scan_page_model.dart';
+export 'scan_page_model.dart';
 
 class ScanPageWidget extends StatefulWidget {
   const ScanPageWidget({Key? key}) : super(key: key);
@@ -13,18 +16,23 @@ class ScanPageWidget extends StatefulWidget {
 }
 
 class _ScanPageWidgetState extends State<ScanPageWidget> {
-  final _unfocusNode = FocusNode();
+  late ScanPageModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => ScanPageModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
   void dispose() {
+    _model.dispose();
+
     _unfocusNode.dispose();
     super.dispose();
   }
