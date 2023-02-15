@@ -44,6 +44,14 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
 
   String? get abount;
 
+  String? get alternetEmail;
+
+  bool? get accountUpdated;
+
+  bool? get socialsUpdated;
+
+  bool? get pictureUpdated;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -61,7 +69,11 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
     ..instagram = ''
     ..facebook = ''
     ..whatsappChat = ''
-    ..abount = '';
+    ..abount = ''
+    ..alternetEmail = ''
+    ..accountUpdated = false
+    ..socialsUpdated = false
+    ..pictureUpdated = false;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('users');
@@ -98,6 +110,10 @@ Map<String, dynamic> createUsersRecordData({
   String? facebook,
   String? whatsappChat,
   String? abount,
+  String? alternetEmail,
+  bool? accountUpdated,
+  bool? socialsUpdated,
+  bool? pictureUpdated,
 }) {
   final firestoreData = serializers.toFirestore(
     UsersRecord.serializer,
@@ -116,7 +132,11 @@ Map<String, dynamic> createUsersRecordData({
         ..instagram = instagram
         ..facebook = facebook
         ..whatsappChat = whatsappChat
-        ..abount = abount,
+        ..abount = abount
+        ..alternetEmail = alternetEmail
+        ..accountUpdated = accountUpdated
+        ..socialsUpdated = socialsUpdated
+        ..pictureUpdated = pictureUpdated,
     ),
   );
 

@@ -141,197 +141,234 @@ class _LoginpageWidgetState extends State<LoginpageWidget> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(30, 20, 30, 30),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 350,
-                    decoration: BoxDecoration(
-                      color: Color(0x4CFFFFFF),
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                          child: Image.asset(
-                            'assets/images/logo_free-file.png',
-                            width: 50,
-                            height: 50,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                          child: Text(
-                            'QuiCkCaRd',
-                            style: FlutterFlowTheme.of(context).title1.override(
-                                  fontFamily:
-                                      FlutterFlowTheme.of(context).title1Family,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .title1Family),
-                                ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                          child: Text(
-                            'GET STARTED',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyText1
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .bodyText1Family,
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBtnText,
-                                  fontSize: 10,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .bodyText1Family),
-                                ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                          child: FFButtonWidget(
-                            onPressed: () async {
-                              GoRouter.of(context).prepareAuthEvent();
-                              final user = await signInWithFacebook(context);
-                              if (user == null) {
-                                return;
-                              }
-
-                              final usersUpdateData = createUsersRecordData(
-                                photoUrl: currentUserPhoto,
-                              );
-                              await currentUserReference!
-                                  .update(usersUpdateData);
-
-                              context.goNamedAuth('homepage', mounted);
-                            },
-                            text: 'Login with Facebook',
-                            icon: FaIcon(
-                              FontAwesomeIcons.facebook,
-                            ),
-                            options: FFButtonOptions(
-                              width: 230,
-                              height: 40,
-                              color: FlutterFlowTheme.of(context).primaryColor,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .subtitle2
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .subtitle2Family,
-                                    color: Colors.white,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .subtitle2Family),
-                                  ),
-                              elevation: 0,
-                              borderSide: BorderSide(
-                                color: Colors.transparent,
-                                width: 1,
+                if (() {
+                  if (isAndroid) {
+                    return true;
+                  } else if (isiOS) {
+                    return true;
+                  } else {
+                    return true;
+                  }
+                }())
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(30, 20, 30, 30),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 350,
+                      decoration: BoxDecoration(
+                        color: Color(0x4CFFFFFF),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Visibility(
+                        visible: () {
+                          if (isAndroid) {
+                            return true;
+                          } else if (isiOS) {
+                            return true;
+                          } else {
+                            return true;
+                          }
+                        }(),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                              child: Image.asset(
+                                'assets/images/logo_free-file.png',
+                                width: 50,
+                                height: 50,
+                                fit: BoxFit.cover,
                               ),
-                              borderRadius: BorderRadius.circular(8),
                             ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                          child: FFButtonWidget(
-                            onPressed: () async {
-                              GoRouter.of(context).prepareAuthEvent();
-                              final user = await signInWithGoogle(context);
-                              if (user == null) {
-                                return;
-                              }
-
-                              context.goNamedAuth('homepage', mounted);
-                            },
-                            text: 'Login with Google    ',
-                            icon: FaIcon(
-                              FontAwesomeIcons.google,
-                            ),
-                            options: FFButtonOptions(
-                              width: 230,
-                              height: 40,
-                              color: Color(0xFFDF565E),
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .subtitle2
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .subtitle2Family,
-                                    color: Colors.white,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .subtitle2Family),
-                                  ),
-                              elevation: 0,
-                              borderSide: BorderSide(
-                                color: Colors.transparent,
-                                width: 1,
-                              ),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                        ),
-                        if (isiOS)
-                          isAndroid
-                              ? Container()
-                              : Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 10, 0, 0),
-                                  child: FFButtonWidget(
-                                    onPressed: () async {
-                                      GoRouter.of(context).prepareAuthEvent();
-                                      final user =
-                                          await signInWithApple(context);
-                                      if (user == null) {
-                                        return;
-                                      }
-
-                                      context.goNamedAuth('homepage', mounted);
-                                    },
-                                    text: 'Login with Apple.      ',
-                                    icon: FaIcon(
-                                      FontAwesomeIcons.apple,
-                                    ),
-                                    options: FFButtonOptions(
-                                      width: 230,
-                                      height: 40,
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                              child: Text(
+                                'QuiCkCaRd',
+                                style: FlutterFlowTheme.of(context)
+                                    .title1
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .title1Family,
                                       color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .subtitle2
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .subtitle2Family,
-                                            color: Colors.white,
-                                            useGoogleFonts: GoogleFonts.asMap()
-                                                .containsKey(
-                                                    FlutterFlowTheme.of(context)
-                                                        .subtitle2Family),
-                                          ),
-                                      elevation: 0,
-                                      borderSide: BorderSide(
-                                        color: Colors.transparent,
-                                        width: 1,
-                                      ),
-                                      borderRadius: BorderRadius.circular(8),
+                                          .secondaryBackground,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .title1Family),
                                     ),
-                                  ),
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                              child: Text(
+                                'GET STARTED',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: FlutterFlowTheme.of(context)
+                                          .bodyText1Family,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBtnText,
+                                      fontSize: 10,
+                                      useGoogleFonts: GoogleFonts.asMap()
+                                          .containsKey(
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyText1Family),
+                                    ),
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  GoRouter.of(context).prepareAuthEvent();
+                                  final user =
+                                      await signInWithFacebook(context);
+                                  if (user == null) {
+                                    return;
+                                  }
+
+                                  final usersUpdateData = createUsersRecordData(
+                                    photoUrl: currentUserPhoto,
+                                  );
+                                  await currentUserReference!
+                                      .update(usersUpdateData);
+
+                                  context.goNamedAuth('homepage', mounted);
+                                },
+                                text: 'Login with Facebook',
+                                icon: FaIcon(
+                                  FontAwesomeIcons.facebook,
                                 ),
-                      ],
+                                options: FFButtonOptions(
+                                  width: 230,
+                                  height: 40,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .subtitle2
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .subtitle2Family,
+                                        color: Colors.white,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .subtitle2Family),
+                                      ),
+                                  elevation: 0,
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  GoRouter.of(context).prepareAuthEvent();
+                                  final user = await signInWithGoogle(context);
+                                  if (user == null) {
+                                    return;
+                                  }
+
+                                  context.goNamedAuth('homepage', mounted);
+                                },
+                                text: 'Login with Google    ',
+                                icon: FaIcon(
+                                  FontAwesomeIcons.google,
+                                ),
+                                options: FFButtonOptions(
+                                  width: 230,
+                                  height: 40,
+                                  color: Color(0xFFDF565E),
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .subtitle2
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .subtitle2Family,
+                                        color: Colors.white,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .subtitle2Family),
+                                      ),
+                                  elevation: 0,
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                            ),
+                            if (isiOS)
+                              isAndroid
+                                  ? Container()
+                                  : Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 10, 0, 0),
+                                      child: FFButtonWidget(
+                                        onPressed: () async {
+                                          GoRouter.of(context)
+                                              .prepareAuthEvent();
+                                          final user =
+                                              await signInWithApple(context);
+                                          if (user == null) {
+                                            return;
+                                          }
+
+                                          context.goNamedAuth(
+                                              'homepage', mounted);
+                                        },
+                                        text: 'Login with Apple.      ',
+                                        icon: FaIcon(
+                                          FontAwesomeIcons.apple,
+                                        ),
+                                        options: FFButtonOptions(
+                                          width: 230,
+                                          height: 40,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .subtitle2
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .subtitle2Family,
+                                                color: Colors.white,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .subtitle2Family),
+                                              ),
+                                          elevation: 0,
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                            width: 1,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                      ),
+                                    ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
-                ),
               ],
             ),
           ),

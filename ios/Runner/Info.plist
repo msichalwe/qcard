@@ -59,6 +59,8 @@
 
 	<key>NSCameraUsageDescription</key>
     <string>In order to scan for barcodes and QR codes, this app requires permission to access the camera.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>In order to upload media, this app requires permission to access the photo library.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
     <string>Allow QuiCkCaRd to access your location to allow us to improve our contacts algorithim</string>
 	<key>PermissionGroupNotification</key>
@@ -69,6 +71,11 @@
     <string>Allow QuiCkCaRd to access your camera to scan other QRCODEs</string>
 	<key>NSFaceIDUsageDescription</key>
     <string>Allow QuiCkCaRd to access your biometrics to add security to your app</string>
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>fetch</string>
+        <string>remote-notification</string>
+    </array>
 
     <key>LSApplicationQueriesSchemes</key>
     <array>

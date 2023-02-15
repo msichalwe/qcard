@@ -8,6 +8,8 @@ import '../flutter_flow_theme.dart';
 import '../../backend/backend.dart';
 
 import '../../auth/firebase_user_provider.dart';
+import '../../backend/push_notifications/push_notifications_handler.dart'
+    show PushNotificationsHandler;
 
 import '../../index.dart';
 import '../../main.dart';
@@ -102,12 +104,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => ScanPageWidget(),
             ),
             FFRoute(
-              name: 'profile',
-              path: 'profile',
-              requireAuth: true,
-              builder: (context, params) => ProfileWidget(),
-            ),
-            FFRoute(
               name: 'account',
               path: 'account',
               requireAuth: true,
@@ -128,6 +124,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                     'userId', ParamType.DocumentReference, false, ['users']),
                 usermainId: params.getParam('usermainId', ParamType.String),
               ),
+            ),
+            FFRoute(
+              name: 'editAccount',
+              path: 'editAccount',
+              requireAuth: true,
+              builder: (context, params) => EditAccountWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),
@@ -311,7 +313,7 @@ class FFRoute {
                     ),
                   ),
                 )
-              : page;
+              : PushNotificationsHandler(child: page);
 
           final transitionInfo = state.transitionInfo;
           return transitionInfo.hasTransition
