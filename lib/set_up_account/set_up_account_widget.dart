@@ -617,9 +617,6 @@ class _SetUpAccountWidgetState extends State<SetUpAccountWidget> {
                     padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        GoRouter.of(context).prepareAuthEvent();
-                        await signOut();
-
                         final usersUpdateData = createUsersRecordData(
                           phoneNumber: _model.phoneNumberController.text,
                           abount: _model.myBioController.text,
@@ -628,7 +625,7 @@ class _SetUpAccountWidgetState extends State<SetUpAccountWidget> {
                         );
                         await currentUserReference!.update(usersUpdateData);
 
-                        context.pushNamedAuth('setUpAccountTwo', mounted);
+                        context.pushNamed('setUpAccountTwo');
                       },
                       text: 'Next step',
                       options: FFButtonOptions(
