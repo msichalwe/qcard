@@ -138,10 +138,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => SetUpAccountWidget(),
             ),
             FFRoute(
-              name: 'editAccountTwo',
+              name: 'setUpAccountTwo',
               path: 'setUpSocials',
               requireAuth: true,
-              builder: (context, params) => EditAccountTwoWidget(),
+              builder: (context, params) => SetUpAccountTwoWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),

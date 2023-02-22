@@ -10,25 +10,25 @@ import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'edit_account_two_model.dart';
-export 'edit_account_two_model.dart';
+import 'set_up_account_two_model.dart';
+export 'set_up_account_two_model.dart';
 
-class EditAccountTwoWidget extends StatefulWidget {
-  const EditAccountTwoWidget({Key? key}) : super(key: key);
+class SetUpAccountTwoWidget extends StatefulWidget {
+  const SetUpAccountTwoWidget({Key? key}) : super(key: key);
 
   @override
-  _EditAccountTwoWidgetState createState() => _EditAccountTwoWidgetState();
+  _SetUpAccountTwoWidgetState createState() => _SetUpAccountTwoWidgetState();
 }
 
-class _EditAccountTwoWidgetState extends State<EditAccountTwoWidget> {
-  late EditAccountTwoModel _model;
+class _SetUpAccountTwoWidgetState extends State<SetUpAccountTwoWidget> {
+  late SetUpAccountTwoModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => EditAccountTwoModel());
+    _model = createModel(context, () => SetUpAccountTwoModel());
 
     _model.facebookController ??= TextEditingController(
         text: valueOrDefault<String>(

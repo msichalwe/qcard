@@ -625,7 +625,7 @@ class _SetUpAccountWidgetState extends State<SetUpAccountWidget> {
                         );
                         await currentUserReference!.update(usersUpdateData);
 
-                        context.pushNamed('editAccountTwo');
+                        context.pushNamed('setUpAccountTwo');
                       },
                       text: 'Next step',
                       options: FFButtonOptions(

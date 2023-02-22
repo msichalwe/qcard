@@ -40,7 +40,10 @@ class _HomepageWidgetState extends State<HomepageWidget> {
       if (valueOrDefault<bool>(currentUserDocument?.accountUpdated, false)) {
         Navigator.pop(context);
       } else {
-        context.goNamed('editAccount');
+        if (Navigator.of(context).canPop()) {
+          context.pop();
+        }
+        context.pushNamed('setUpAccount');
 
         return;
       }
