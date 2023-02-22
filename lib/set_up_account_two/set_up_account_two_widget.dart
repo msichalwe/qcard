@@ -170,11 +170,11 @@ class _SetUpAccountTwoWidgetState extends State<SetUpAccountTwoWidget> {
                                 FlutterFlowTheme.of(context).bodyText1Family),
                           ),
                       minLines: 1,
-                      keyboardType: TextInputType.phone,
+                      keyboardType: TextInputType.url,
                       validator: _model.facebookControllerValidator
                           .asValidator(context),
                       inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp('[0-9]'))
+                        FilteringTextInputFormatter.allow(RegExp('[a-zA-Z0-9]'))
                       ],
                     ),
                   ),
@@ -268,9 +268,12 @@ class _SetUpAccountTwoWidgetState extends State<SetUpAccountTwoWidget> {
                                 FlutterFlowTheme.of(context).bodyText1Family),
                           ),
                       minLines: 1,
-                      keyboardType: TextInputType.emailAddress,
+                      keyboardType: TextInputType.url,
                       validator: _model.instagramControllerValidator
                           .asValidator(context),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(RegExp('[a-zA-Z0-9]'))
+                      ],
                     ),
                   ),
                 ),
