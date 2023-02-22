@@ -32,11 +32,11 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
     super.initState();
     _model = createModel(context, () => EditAccountModel());
 
-    _model.phoneNumberController =
+    _model.phoneNumberController ??=
         TextEditingController(text: currentPhoneNumber);
-    _model.alternatEmailAddressController = TextEditingController(
+    _model.alternatEmailAddressController ??= TextEditingController(
         text: valueOrDefault(currentUserDocument?.alternetEmail, ''));
-    _model.myBioController = TextEditingController(
+    _model.myBioController ??= TextEditingController(
         text: valueOrDefault(currentUserDocument?.abount, ''));
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -307,7 +307,7 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color(0xFFF1F4F8),
+                            color: Color(0x00000000),
                             width: 2,
                           ),
                           borderRadius: BorderRadius.circular(8),
@@ -406,7 +406,7 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color(0xFFF1F4F8),
+                            color: Color(0x00000000),
                             width: 2,
                           ),
                           borderRadius: BorderRadius.circular(8),
@@ -497,7 +497,7 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Color(0xFFF1F4F8),
+                            color: Color(0x00000000),
                             width: 2,
                           ),
                           borderRadius: BorderRadius.circular(8),

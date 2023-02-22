@@ -488,8 +488,6 @@ class _AccountWidgetState extends State<AccountWidget> {
                     await signOut();
 
                     context.goNamedAuth('loginpage', mounted);
-
-                    setState(() {});
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width,

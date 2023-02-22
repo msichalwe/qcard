@@ -28,7 +28,7 @@ class _ScansWidgetState extends State<ScansWidget> {
     super.initState();
     _model = createModel(context, () => ScansModel());
 
-    _model.textController = TextEditingController();
+    _model.textController ??= TextEditingController();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 

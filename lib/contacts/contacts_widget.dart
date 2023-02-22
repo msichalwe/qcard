@@ -28,7 +28,7 @@ class _ContactsWidgetState extends State<ContactsWidget> {
     super.initState();
     _model = createModel(context, () => ContactsModel());
 
-    _model.textController = TextEditingController();
+    _model.textController ??= TextEditingController();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
