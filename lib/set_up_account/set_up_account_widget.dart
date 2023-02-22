@@ -625,7 +625,7 @@ class _SetUpAccountWidgetState extends State<SetUpAccountWidget> {
                         );
                         await currentUserReference!.update(usersUpdateData);
 
-                        context.pushNamed('editAccountTwo');
+                        context.goNamed('editAccountTwo');
 
                         ScaffoldMessenger.of(context).clearSnackBars();
                         ScaffoldMessenger.of(context).showSnackBar(
