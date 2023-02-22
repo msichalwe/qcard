@@ -126,6 +126,7 @@ final parametersBuilderMap =
         },
       ),
   'editAccount': ParameterData.none(),
+  'setUpAccount': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

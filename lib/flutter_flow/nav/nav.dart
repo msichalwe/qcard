@@ -130,6 +130,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'editAccount',
               requireAuth: true,
               builder: (context, params) => EditAccountWidget(),
+            ),
+            FFRoute(
+              name: 'setUpAccount',
+              path: 'setUpAccount',
+              requireAuth: true,
+              builder: (context, params) => SetUpAccountWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),
