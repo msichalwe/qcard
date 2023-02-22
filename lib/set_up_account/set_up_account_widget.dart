@@ -625,20 +625,7 @@ class _SetUpAccountWidgetState extends State<SetUpAccountWidget> {
                         );
                         await currentUserReference!.update(usersUpdateData);
 
-                        context.goNamed('editAccountTwo');
-
-                        ScaffoldMessenger.of(context).clearSnackBars();
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              'Information Updated One more step',
-                              style: FlutterFlowTheme.of(context).subtitle1,
-                            ),
-                            duration: Duration(milliseconds: 4000),
-                            backgroundColor:
-                                FlutterFlowTheme.of(context).primaryBtnText,
-                          ),
-                        );
+                        context.pushNamed('editAccountTwo');
                       },
                       text: 'Next step',
                       options: FFButtonOptions(

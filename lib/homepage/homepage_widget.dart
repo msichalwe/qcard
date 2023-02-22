@@ -40,7 +40,7 @@ class _HomepageWidgetState extends State<HomepageWidget> {
       if (valueOrDefault<bool>(currentUserDocument?.accountUpdated, false)) {
         Navigator.pop(context);
       } else {
-        context.pushNamed('editAccount');
+        context.goNamed('editAccount');
       }
 
       await requestPermission(photoLibraryPermission);
@@ -204,19 +204,9 @@ class _HomepageWidgetState extends State<HomepageWidget> {
                           _model.userData =
                               await FlutterBarcodeScanner.scanBarcode(
                             '#C62828', // scanning line color
-                            'Cancel Scan', // cancel button text
+                            'Cancel', // cancel button text
                             true, // whether to show the flash icon
-                            ScanMode.BARCODE,
-                          );
-
-                          context.pushNamed(
-                            'profilepage_main',
-                            queryParams: {
-                              'usermainId': serializeParam(
-                                _model.userData,
-                                ParamType.String,
-                              ),
-                            }.withoutNulls,
+                            ScanMode.QR,
                           );
 
                           final scansCreateData = createScansRecordData(
@@ -227,6 +217,18 @@ class _HomepageWidgetState extends State<HomepageWidget> {
                           await ScansRecord.collection
                               .doc()
                               .set(scansCreateData);
+                          if (Navigator.of(context).canPop()) {
+                            context.pop();
+                          }
+                          context.pushNamed(
+                            'profilepage_main',
+                            queryParams: {
+                              'usermainId': serializeParam(
+                                _model.userData,
+                                ParamType.String,
+                              ),
+                            }.withoutNulls,
+                          );
 
                           setState(() {});
                         },
