@@ -46,6 +46,8 @@ class _HomepageWidgetState extends State<HomepageWidget> {
           }
           context.pushNamedAuth('setUpAccount', mounted);
 
+          GoRouter.of(context).prepareAuthEvent();
+          await signOut();
           return;
         } else {
           GoRouter.of(context).prepareAuthEvent();
