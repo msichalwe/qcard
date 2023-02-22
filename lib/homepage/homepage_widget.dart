@@ -41,6 +41,8 @@ class _HomepageWidgetState extends State<HomepageWidget> {
         Navigator.pop(context);
       } else {
         context.goNamed('editAccount');
+
+        return;
       }
 
       await requestPermission(photoLibraryPermission);
@@ -200,6 +202,7 @@ class _HomepageWidgetState extends State<HomepageWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                       child: FFButtonWidget(
                         onPressed: () async {
+                          var _shouldSetState = false;
                           // This action takes us to the barcode scanning page and then sends us to the specific user that was scanned
                           _model.userData =
                               await FlutterBarcodeScanner.scanBarcode(
@@ -209,28 +212,36 @@ class _HomepageWidgetState extends State<HomepageWidget> {
                             ScanMode.QR,
                           );
 
-                          final scansCreateData = createScansRecordData(
-                            scannedBy: currentUserReference,
-                            scannedAt: getCurrentTimestamp,
-                            scanedUserId: _model.userData,
-                          );
-                          await ScansRecord.collection
-                              .doc()
-                              .set(scansCreateData);
-                          if (Navigator.of(context).canPop()) {
-                            context.pop();
-                          }
-                          context.pushNamed(
-                            'profilepage_main',
-                            queryParams: {
-                              'usermainId': serializeParam(
-                                _model.userData,
-                                ParamType.String,
-                              ),
-                            }.withoutNulls,
-                          );
+                          _shouldSetState = true;
+                          if (_model.userData != null &&
+                              _model.userData != '') {
+                            final scansCreateData = createScansRecordData(
+                              scannedBy: currentUserReference,
+                              scannedAt: getCurrentTimestamp,
+                              scanedUserId: _model.userData,
+                            );
+                            await ScansRecord.collection
+                                .doc()
+                                .set(scansCreateData);
 
-                          setState(() {});
+                            context.pushNamed(
+                              'profilepage_main',
+                              queryParams: {
+                                'usermainId': serializeParam(
+                                  _model.userData,
+                                  ParamType.String,
+                                ),
+                              }.withoutNulls,
+                            );
+
+                            if (_shouldSetState) setState(() {});
+                            return;
+                          } else {
+                            if (_shouldSetState) setState(() {});
+                            return;
+                          }
+
+                          if (_shouldSetState) setState(() {});
                         },
                         text: 'SCAN QR CODE',
                         icon: FaIcon(
