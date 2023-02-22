@@ -65,14 +65,14 @@ class _SetUpAccountWidgetState extends State<SetUpAccountWidget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 40, 0, 0),
                   child: Text(
-                    'Welcome to QuiCkCard\nOne more step!!.. Edit the information below to complete your set up',
+                    'Welcome to QuiCkCard\nComplete account setup intwo easy step\'s !!\n',
                     textAlign: TextAlign.center,
                     style: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily:
                               FlutterFlowTheme.of(context).bodyText1Family,
                           color: FlutterFlowTheme.of(context).primaryBtnText,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w800,
                           useGoogleFonts: GoogleFonts.asMap().containsKey(
                               FlutterFlowTheme.of(context).bodyText1Family),
                         ),
@@ -94,16 +94,101 @@ class _SetUpAccountWidgetState extends State<SetUpAccountWidget> {
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
                           child: AuthUserStreamWidget(
-                            builder: (context) => Container(
-                              width: 90,
-                              height: 90,
-                              clipBehavior: Clip.antiAlias,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                              ),
-                              child: Image.network(
-                                currentUserPhoto,
-                                fit: BoxFit.fitWidth,
+                            builder: (context) => InkWell(
+                              onTap: () async {
+                                final selectedMedia = await selectMedia(
+                                  mediaSource: MediaSource.photoGallery,
+                                  multiImage: false,
+                                );
+                                if (selectedMedia != null &&
+                                    selectedMedia.every((m) =>
+                                        validateFileFormat(
+                                            m.storagePath, context))) {
+                                  setState(
+                                      () => _model.isMediaUploading1 = true);
+                                  var selectedUploadedFiles =
+                                      <FFUploadedFile>[];
+                                  var downloadUrls = <String>[];
+                                  try {
+                                    showUploadMessage(
+                                      context,
+                                      'Uploading file...',
+                                      showLoading: true,
+                                    );
+                                    selectedUploadedFiles = selectedMedia
+                                        .map((m) => FFUploadedFile(
+                                              name:
+                                                  m.storagePath.split('/').last,
+                                              bytes: m.bytes,
+                                              height: m.dimensions?.height,
+                                              width: m.dimensions?.width,
+                                            ))
+                                        .toList();
+
+                                    downloadUrls = (await Future.wait(
+                                      selectedMedia.map(
+                                        (m) async => await uploadData(
+                                            m.storagePath, m.bytes),
+                                      ),
+                                    ))
+                                        .where((u) => u != null)
+                                        .map((u) => u!)
+                                        .toList();
+                                  } finally {
+                                    ScaffoldMessenger.of(context)
+                                        .hideCurrentSnackBar();
+                                    _model.isMediaUploading1 = false;
+                                  }
+                                  if (selectedUploadedFiles.length ==
+                                          selectedMedia.length &&
+                                      downloadUrls.length ==
+                                          selectedMedia.length) {
+                                    setState(() {
+                                      _model.uploadedLocalFile1 =
+                                          selectedUploadedFiles.first;
+                                      _model.uploadedFileUrl1 =
+                                          downloadUrls.first;
+                                    });
+                                    showUploadMessage(context, 'Success!');
+                                  } else {
+                                    setState(() {});
+                                    showUploadMessage(
+                                        context, 'Failed to upload media');
+                                    return;
+                                  }
+                                }
+
+                                final usersUpdateData = createUsersRecordData(
+                                  photoUrl: _model.uploadedFileUrl2,
+                                );
+                                await currentUserReference!
+                                    .update(usersUpdateData);
+                                ScaffoldMessenger.of(context).clearSnackBars();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Picture updated ',
+                                      style: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                      ),
+                                    ),
+                                    duration: Duration(milliseconds: 2150),
+                                    backgroundColor: Color(0x00000000),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                width: 90,
+                                height: 90,
+                                clipBehavior: Clip.antiAlias,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Image.network(
+                                  currentUserPhoto,
+                                  fit: BoxFit.fitWidth,
+                                ),
                               ),
                             ),
                           ),
@@ -159,7 +244,7 @@ class _SetUpAccountWidgetState extends State<SetUpAccountWidget> {
                           if (selectedMedia != null &&
                               selectedMedia.every((m) =>
                                   validateFileFormat(m.storagePath, context))) {
-                            setState(() => _model.isMediaUploading = true);
+                            setState(() => _model.isMediaUploading2 = true);
                             var selectedUploadedFiles = <FFUploadedFile>[];
                             var downloadUrls = <String>[];
                             try {
@@ -189,15 +274,15 @@ class _SetUpAccountWidgetState extends State<SetUpAccountWidget> {
                             } finally {
                               ScaffoldMessenger.of(context)
                                   .hideCurrentSnackBar();
-                              _model.isMediaUploading = false;
+                              _model.isMediaUploading2 = false;
                             }
                             if (selectedUploadedFiles.length ==
                                     selectedMedia.length &&
                                 downloadUrls.length == selectedMedia.length) {
                               setState(() {
-                                _model.uploadedLocalFile =
+                                _model.uploadedLocalFile2 =
                                     selectedUploadedFiles.first;
-                                _model.uploadedFileUrl = downloadUrls.first;
+                                _model.uploadedFileUrl2 = downloadUrls.first;
                               });
                               showUploadMessage(context, 'Success!');
                             } else {
@@ -209,7 +294,7 @@ class _SetUpAccountWidgetState extends State<SetUpAccountWidget> {
                           }
 
                           final usersUpdateData = createUsersRecordData(
-                            photoUrl: _model.uploadedFileUrl,
+                            photoUrl: _model.uploadedFileUrl2,
                           );
                           await currentUserReference!.update(usersUpdateData);
                           ScaffoldMessenger.of(context).clearSnackBars();
@@ -227,9 +312,9 @@ class _SetUpAccountWidgetState extends State<SetUpAccountWidget> {
                             ),
                           );
                         },
-                        text: 'Change Photo',
+                        text: 'Edit your display picture',
                         options: FFButtonOptions(
-                          width: 130,
+                          width: 180,
                           height: 40,
                           color: Color(0xFF1B1743),
                           textStyle: FlutterFlowTheme.of(context)
@@ -266,6 +351,7 @@ class _SetUpAccountWidgetState extends State<SetUpAccountWidget> {
                       ),
                       obscureText: false,
                       decoration: InputDecoration(
+                        labelText: 'Add your phone number',
                         labelStyle: FlutterFlowTheme.of(context)
                             .bodyText2
                             .override(
@@ -364,7 +450,7 @@ class _SetUpAccountWidgetState extends State<SetUpAccountWidget> {
                       textCapitalization: TextCapitalization.none,
                       obscureText: false,
                       decoration: InputDecoration(
-                        labelText: 'Alternet Email Address',
+                        labelText: 'Alternet Email Address from your main one',
                         labelStyle: FlutterFlowTheme.of(context)
                             .bodyText2
                             .override(
@@ -455,11 +541,12 @@ class _SetUpAccountWidgetState extends State<SetUpAccountWidget> {
                       controller: _model.myBioController,
                       obscureText: false,
                       decoration: InputDecoration(
+                        labelText: 'Tell people a little about yourself.',
                         labelStyle: FlutterFlowTheme.of(context)
                             .bodyText2
                             .override(
                               fontFamily: 'Lexend Deca',
-                              color: Color(0xFF95A1AC),
+                              color: FlutterFlowTheme.of(context).overlay0,
                               fontSize: 14,
                               fontWeight: FontWeight.normal,
                               useGoogleFonts: GoogleFonts.asMap().containsKey(
@@ -537,12 +624,14 @@ class _SetUpAccountWidgetState extends State<SetUpAccountWidget> {
                               _model.alternatEmailAddressController.text,
                         );
                         await currentUserReference!.update(usersUpdateData);
-                        context.pop();
+
+                        context.pushNamed('editAccountTwo');
+
                         ScaffoldMessenger.of(context).clearSnackBars();
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              'Profile updated ',
+                              'Information Updated One more step',
                               style: FlutterFlowTheme.of(context).subtitle1,
                             ),
                             duration: Duration(milliseconds: 4000),
@@ -551,7 +640,7 @@ class _SetUpAccountWidgetState extends State<SetUpAccountWidget> {
                           ),
                         );
                       },
-                      text: 'Save Changes',
+                      text: 'Next step',
                       options: FFButtonOptions(
                         width: 340,
                         height: 60,

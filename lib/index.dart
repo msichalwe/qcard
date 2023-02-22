@@ -9,3 +9,5 @@ export 'profilepage_main/profilepage_main_widget.dart'
     show ProfilepageMainWidget;
 export 'edit_account/edit_account_widget.dart' show EditAccountWidget;
 export 'set_up_account/set_up_account_widget.dart' show SetUpAccountWidget;
+export 'edit_account_two/edit_account_two_widget.dart'
+    show EditAccountTwoWidget;

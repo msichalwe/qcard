@@ -2,6 +2,7 @@ import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -376,8 +377,9 @@ class _ContactsWidgetState extends State<ContactsWidget> {
                                             decoration: BoxDecoration(
                                               shape: BoxShape.circle,
                                             ),
-                                            child: Image.network(
-                                              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNeXu32B1dN8B0E79pU3XVNPFZxItOGjZDcQ&usqp=CAU',
+                                            child: CachedNetworkImage(
+                                              imageUrl: listViewContactsRecord
+                                                  .imageUrl!,
                                               fit: BoxFit.cover,
                                             ),
                                           ),
@@ -417,7 +419,7 @@ class _ContactsWidgetState extends State<ContactsWidget> {
                                                   ),
                                                   Text(
                                                     listViewContactsRecord
-                                                        .phoneNumber!,
+                                                        .email!,
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyText1
