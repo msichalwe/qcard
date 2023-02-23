@@ -157,112 +157,6 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget>
                           ),
                         ),
                       ),
-                      Align(
-                        alignment: AlignmentDirectional(0, -0.87),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                width: 40,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 4,
-                                      color: Color(0x520E151B),
-                                      offset: Offset(0, 2),
-                                    )
-                                  ],
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: FlutterFlowIconButton(
-                                  borderColor: Colors.transparent,
-                                  borderRadius: 8,
-                                  borderWidth: 1,
-                                  buttonSize: 40,
-                                  fillColor: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  icon: Icon(
-                                    Icons.arrow_back_rounded,
-                                    color: Colors.black,
-                                    size: 20,
-                                  ),
-                                  onPressed: () async {
-                                    context.pop();
-                                  },
-                                ),
-                              ),
-                              Builder(
-                                builder: (context) => InkWell(
-                                  onTap: () async {
-                                    await Share.share(
-                                      'https://quickcardzm.com/share/${profilepageMainUsersRecord!.uid}',
-                                      sharePositionOrigin:
-                                          getWidgetBoundingBox(context),
-                                    );
-                                  },
-                                  child: Container(
-                                    width: 40,
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          blurRadius: 4,
-                                          color: Color(0x520E151B),
-                                          offset: Offset(0, 2),
-                                        )
-                                      ],
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                    child: Builder(
-                                      builder: (context) =>
-                                          FlutterFlowIconButton(
-                                        borderColor: Colors.transparent,
-                                        borderRadius: 8,
-                                        borderWidth: 1,
-                                        buttonSize: 40,
-                                        fillColor: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        icon: FaIcon(
-                                          FontAwesomeIcons.shareAlt,
-                                          color: Colors.black,
-                                          size: 20,
-                                        ),
-                                        onPressed: () async {
-                                          _model.currentPageLink =
-                                              await generateCurrentPageLink(
-                                            context,
-                                            title:
-                                                '${profilepageMainUsersRecord!.displayName}\'s Contact Card',
-                                            imageUrl:
-                                                profilepageMainUsersRecord!
-                                                    .photoUrl,
-                                            description:
-                                                'Hey check out ${profilepageMainUsersRecord!.displayName}\'s contact card on Quickcard. Get contact information quick and easy.',
-                                          );
-
-                                          await Share.share(
-                                            _model.currentPageLink,
-                                            sharePositionOrigin:
-                                                getWidgetBoundingBox(context),
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                   SingleChildScrollView(
@@ -994,6 +888,110 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget>
                           ),
                         ),
                       ],
+                    ),
+                  ),
+                  Align(
+                    alignment: AlignmentDirectional(0, -0.87),
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 4,
+                                  color: Color(0x520E151B),
+                                  offset: Offset(0, 2),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: FlutterFlowIconButton(
+                              borderColor: Colors.transparent,
+                              borderRadius: 8,
+                              borderWidth: 1,
+                              buttonSize: 40,
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              icon: Icon(
+                                Icons.arrow_back_rounded,
+                                color: Colors.black,
+                                size: 20,
+                              ),
+                              onPressed: () async {
+                                context.pop();
+                              },
+                            ),
+                          ),
+                          Builder(
+                            builder: (context) => InkWell(
+                              onTap: () async {
+                                await Share.share(
+                                  'https://quickcardzm.com/share/${profilepageMainUsersRecord!.uid}',
+                                  sharePositionOrigin:
+                                      getWidgetBoundingBox(context),
+                                );
+                              },
+                              child: Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 4,
+                                      color: Color(0x520E151B),
+                                      offset: Offset(0, 2),
+                                    )
+                                  ],
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Builder(
+                                  builder: (context) => FlutterFlowIconButton(
+                                    borderColor: Colors.transparent,
+                                    borderRadius: 8,
+                                    borderWidth: 1,
+                                    buttonSize: 40,
+                                    fillColor: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    icon: FaIcon(
+                                      FontAwesomeIcons.shareAlt,
+                                      color: Colors.black,
+                                      size: 20,
+                                    ),
+                                    onPressed: () async {
+                                      _model.currentPageLink =
+                                          await generateCurrentPageLink(
+                                        context,
+                                        title:
+                                            '${profilepageMainUsersRecord!.displayName}\'s Contact Card',
+                                        imageUrl: profilepageMainUsersRecord!
+                                            .photoUrl,
+                                        description:
+                                            'Hey check out ${profilepageMainUsersRecord!.displayName}\'s contact card on Quickcard. Get contact information quick and easy.',
+                                      );
+
+                                      await Share.share(
+                                        _model.currentPageLink,
+                                        sharePositionOrigin:
+                                            getWidgetBoundingBox(context),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
