@@ -226,7 +226,9 @@ class _HomepageWidgetState extends State<HomepageWidget> {
                             await ScansRecord.collection
                                 .doc()
                                 .set(scansCreateData);
-
+                            if (Navigator.of(context).canPop()) {
+                              context.pop();
+                            }
                             context.pushNamed(
                               'profilepage_main',
                               queryParams: {
