@@ -240,7 +240,6 @@ class _HomepageWidgetState extends State<HomepageWidget> {
                             if (_shouldSetState) setState(() {});
                             return;
                           } else {
-                            context.pop();
                             if (_shouldSetState) setState(() {});
                             return;
                           }
