@@ -103,101 +103,6 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget> {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  Align(
-                    alignment: AlignmentDirectional(0, -0.87),
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 4,
-                                  color: Color(0x520E151B),
-                                  offset: Offset(0, 2),
-                                )
-                              ],
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: FlutterFlowIconButton(
-                              borderColor: Colors.transparent,
-                              borderRadius: 8,
-                              borderWidth: 1,
-                              buttonSize: 40,
-                              fillColor: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              icon: Icon(
-                                Icons.arrow_back_rounded,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 20,
-                              ),
-                              onPressed: () async {
-                                context.pop();
-                              },
-                            ),
-                          ),
-                          Builder(
-                            builder: (context) => InkWell(
-                              onTap: () async {
-                                await Share.share(
-                                  'https://quickcardzm.com/share/${profilepageMainUsersRecord!.uid}',
-                                  sharePositionOrigin:
-                                      getWidgetBoundingBox(context),
-                                );
-                              },
-                              child: Container(
-                                width: 40,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 4,
-                                      color: Color(0x520E151B),
-                                      offset: Offset(0, 2),
-                                    )
-                                  ],
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: Builder(
-                                  builder: (context) => FlutterFlowIconButton(
-                                    borderColor: Colors.transparent,
-                                    borderRadius: 8,
-                                    borderWidth: 1,
-                                    buttonSize: 40,
-                                    fillColor: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    icon: Icon(
-                                      Icons.ios_share,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      size: 20,
-                                    ),
-                                    onPressed: () async {
-                                      await Share.share(
-                                        'https://quickcardzm.com/share/${profilepageMainUsersRecord!.uid}',
-                                        sharePositionOrigin:
-                                            getWidgetBoundingBox(context),
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
                   SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
@@ -927,6 +832,101 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget> {
                           ),
                         ),
                       ],
+                    ),
+                  ),
+                  Align(
+                    alignment: AlignmentDirectional(0, -0.87),
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 4,
+                                  color: Color(0x520E151B),
+                                  offset: Offset(0, 2),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: FlutterFlowIconButton(
+                              borderColor: Colors.transparent,
+                              borderRadius: 8,
+                              borderWidth: 1,
+                              buttonSize: 40,
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              icon: Icon(
+                                Icons.arrow_back_rounded,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 20,
+                              ),
+                              onPressed: () async {
+                                context.pop();
+                              },
+                            ),
+                          ),
+                          Builder(
+                            builder: (context) => InkWell(
+                              onTap: () async {
+                                await Share.share(
+                                  'https://quickcardzm.com/share/${profilepageMainUsersRecord!.uid}',
+                                  sharePositionOrigin:
+                                      getWidgetBoundingBox(context),
+                                );
+                              },
+                              child: Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 4,
+                                      color: Color(0x520E151B),
+                                      offset: Offset(0, 2),
+                                    )
+                                  ],
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Builder(
+                                  builder: (context) => FlutterFlowIconButton(
+                                    borderColor: Colors.transparent,
+                                    borderRadius: 8,
+                                    borderWidth: 1,
+                                    buttonSize: 40,
+                                    fillColor: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    icon: Icon(
+                                      Icons.ios_share,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      size: 20,
+                                    ),
+                                    onPressed: () async {
+                                      await Share.share(
+                                        'https://quickcardzm.com/share/${profilepageMainUsersRecord!.uid}',
+                                        sharePositionOrigin:
+                                            getWidgetBoundingBox(context),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
