@@ -3,6 +3,7 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -656,15 +657,18 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget> {
                                                                         crossAxisAlignment:
                                                                             CrossAxisAlignment.start,
                                                                         children: [
-                                                                          Text(
+                                                                          SelectionArea(
+                                                                              child: AutoSizeText(
                                                                             profilepageMainUsersRecord!.facebook!,
+                                                                            maxLines:
+                                                                                2,
                                                                             style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                   fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
                                                                                   color: FlutterFlowTheme.of(context).primaryText,
-                                                                                  fontSize: 20,
+                                                                                  fontSize: 15,
                                                                                   useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
                                                                                 ),
-                                                                          ),
+                                                                          )),
                                                                           Text(
                                                                             'tap here to view facebook account',
                                                                             style: FlutterFlowTheme.of(context).bodyText1.override(
@@ -770,15 +774,18 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget> {
                                                                         crossAxisAlignment:
                                                                             CrossAxisAlignment.start,
                                                                         children: [
-                                                                          Text(
+                                                                          SelectionArea(
+                                                                              child: Text(
                                                                             profilepageMainUsersRecord!.instagram!,
+                                                                            maxLines:
+                                                                                2,
                                                                             style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                   fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
                                                                                   color: FlutterFlowTheme.of(context).primaryText,
-                                                                                  fontSize: 20,
+                                                                                  fontSize: 15,
                                                                                   useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
                                                                                 ),
-                                                                          ),
+                                                                          )),
                                                                           Text(
                                                                             'tap here to view IG',
                                                                             style: FlutterFlowTheme.of(context).bodyText1.override(
