@@ -85,15 +85,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => HomepageWidget(),
             ),
             FFRoute(
-              name: 'loginpage',
-              path: 'loginpage',
-              builder: (context, params) => LoginpageWidget(),
-            ),
-            FFRoute(
               name: 'contacts',
               path: 'contacts',
               requireAuth: true,
               builder: (context, params) => ContactsWidget(),
+            ),
+            FFRoute(
+              name: 'loginpage',
+              path: 'loginpage',
+              builder: (context, params) => LoginpageWidget(),
             ),
             FFRoute(
               name: 'scanPage',

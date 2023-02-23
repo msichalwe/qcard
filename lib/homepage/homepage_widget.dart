@@ -3,7 +3,6 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../flutter_flow/permissions_util.dart';
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -37,20 +36,14 @@ class _HomepageWidgetState extends State<HomepageWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (valueOrDefault<bool>(currentUserDocument?.accountUpdated, false)) {
-        await requestPermission(notificationsPermission);
-        await requestPermission(locationPermission);
-        await requestPermission(cameraPermission);
-      } else {
-        if (Navigator.of(context).canPop()) {
-          context.pop();
-        }
-        context.pushNamed('setUpAccount');
-
+      if (valueOrDefault<bool>(currentUserDocument?.accountUpdated, false) ==
+          true) {
         return;
       }
 
-      await requestPermission(photoLibraryPermission);
+      context.pushNamed('setUpAccount');
+
+      return;
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
