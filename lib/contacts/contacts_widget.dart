@@ -386,7 +386,7 @@ class _ContactsWidgetState extends State<ContactsWidget> {
                         ),
                       ),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(10, 30, 0, 0),
+                        padding: EdgeInsetsDirectional.fromSTEB(10, 30, 0, 30),
                         child: PagedListView<DocumentSnapshot<Object?>?,
                             ContactsRecord>(
                           pagingController: () {

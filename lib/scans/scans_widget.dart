@@ -256,7 +256,7 @@ class _ScansWidgetState extends State<ScansWidget>
                         borderRadius: BorderRadius.circular(0),
                       ),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(10, 10, 0, 0),
+                        padding: EdgeInsetsDirectional.fromSTEB(10, 10, 0, 30),
                         child: StreamBuilder<List<ScansRecord>>(
                           stream: queryScansRecord(
                             queryBuilder: (scansRecord) => scansRecord.where(
