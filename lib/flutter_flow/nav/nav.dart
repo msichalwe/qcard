@@ -140,6 +140,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'setUpSocials',
               requireAuth: true,
               builder: (context, params) => SetUpAccountTwoWidget(),
+            ),
+            FFRoute(
+              name: 'userProfileContacts',
+              path: 'userProfileContacts',
+              requireAuth: true,
+              builder: (context, params) => UserProfileContactsWidget(
+                userId: params.getParam(
+                    'userId', ParamType.DocumentReference, false, ['users']),
+                usermainId: params.getParam('usermainId', ParamType.String),
+              ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),

@@ -226,6 +226,13 @@ class _HomepageWidgetState extends State<HomepageWidget> {
                                   ParamType.String,
                                 ),
                               }.withoutNulls,
+                              extra: <String, dynamic>{
+                                kTransitionInfoKey: TransitionInfo(
+                                  hasTransition: true,
+                                  transitionType:
+                                      PageTransitionType.rightToLeft,
+                                ),
+                              },
                             );
 
                             if (_shouldSetState) setState(() {});

@@ -16,11 +16,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'profilepage_main_model.dart';
-export 'profilepage_main_model.dart';
+import 'user_profile_contacts_model.dart';
+export 'user_profile_contacts_model.dart';
 
-class ProfilepageMainWidget extends StatefulWidget {
-  const ProfilepageMainWidget({
+class UserProfileContactsWidget extends StatefulWidget {
+  const UserProfileContactsWidget({
     Key? key,
     this.userId,
     this.usermainId,
@@ -30,12 +30,13 @@ class ProfilepageMainWidget extends StatefulWidget {
   final String? usermainId;
 
   @override
-  _ProfilepageMainWidgetState createState() => _ProfilepageMainWidgetState();
+  _UserProfileContactsWidgetState createState() =>
+      _UserProfileContactsWidgetState();
 }
 
-class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget>
+class _UserProfileContactsWidgetState extends State<UserProfileContactsWidget>
     with TickerProviderStateMixin {
-  late ProfilepageMainModel _model;
+  late UserProfileContactsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
@@ -58,7 +59,7 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ProfilepageMainModel());
+    _model = createModel(context, () => UserProfileContactsModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -93,14 +94,14 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget>
             ),
           );
         }
-        List<UsersRecord> profilepageMainUsersRecordList = snapshot.data!;
+        List<UsersRecord> userProfileContactsUsersRecordList = snapshot.data!;
         // Return an empty Container when the item does not exist.
         if (snapshot.data!.isEmpty) {
           return Container();
         }
-        final profilepageMainUsersRecord =
-            profilepageMainUsersRecordList.isNotEmpty
-                ? profilepageMainUsersRecordList.first
+        final userProfileContactsUsersRecord =
+            userProfileContactsUsersRecordList.isNotEmpty
+                ? userProfileContactsUsersRecordList.first
                 : null;
         return Scaffold(
           key: scaffoldKey,
@@ -116,7 +117,7 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget>
                   Align(
                     alignment: AlignmentDirectional(0, -1),
                     child: Image.network(
-                      profilepageMainUsersRecord!.photoUrl!,
+                      userProfileContactsUsersRecord!.photoUrl!,
                       width: double.infinity,
                       height: 300,
                       fit: BoxFit.cover,
@@ -163,76 +164,78 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget>
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            profilepageMainUsersRecord!
+                                            userProfileContactsUsersRecord!
                                                 .displayName!,
                                             style: FlutterFlowTheme.of(context)
                                                 .title3,
                                           ),
-                                          FFButtonWidget(
-                                            onPressed: () async {
-                                              final contactsCreateData =
-                                                  createContactsRecordData(
-                                                userRef:
-                                                    profilepageMainUsersRecord!
-                                                        .reference,
-                                                updatedAt: getCurrentTimestamp,
-                                                addedAt: getCurrentTimestamp,
-                                              );
-                                              await ContactsRecord.createDoc(
-                                                      profilepageMainUsersRecord!
-                                                          .reference)
-                                                  .set(contactsCreateData);
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                SnackBar(
-                                                  content: Text(
-                                                    'You have successfully added ${profilepageMainUsersRecord!.displayName} to your contacts 😁',
-                                                    style: TextStyle(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
-                                                    ),
-                                                  ),
-                                                  duration: Duration(
-                                                      milliseconds: 4000),
-                                                  backgroundColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primaryBackground,
-                                                ),
-                                              );
-                                            },
-                                            text: 'Add contact',
-                                            options: FFButtonOptions(
-                                              width: 100,
-                                              height: 40,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryColor,
-                                              textStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .subtitle2
-                                                      .override(
-                                                        fontFamily:
+                                          if (false)
+                                            FFButtonWidget(
+                                              onPressed: () async {
+                                                final contactsCreateData =
+                                                    createContactsRecordData(
+                                                  userRef:
+                                                      userProfileContactsUsersRecord!
+                                                          .reference,
+                                                  updatedAt:
+                                                      getCurrentTimestamp,
+                                                  addedAt: getCurrentTimestamp,
+                                                );
+                                                await ContactsRecord.createDoc(
+                                                        userProfileContactsUsersRecord!
+                                                            .reference)
+                                                    .set(contactsCreateData);
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  SnackBar(
+                                                    content: Text(
+                                                      'You have successfully added ${userProfileContactsUsersRecord!.displayName} to your contacts 😁',
+                                                      style: TextStyle(
+                                                        color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .subtitle2Family,
-                                                        color: Colors.white,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .subtitle2Family),
+                                                                .primaryText,
                                                       ),
-                                              elevation: 0,
-                                              borderSide: BorderSide(
-                                                color: Colors.transparent,
-                                                width: 1,
+                                                    ),
+                                                    duration: Duration(
+                                                        milliseconds: 4000),
+                                                    backgroundColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryBackground,
+                                                  ),
+                                                );
+                                              },
+                                              text: 'Add contact',
+                                              options: FFButtonOptions(
+                                                width: 100,
+                                                height: 40,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryColor,
+                                                textStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .subtitle2
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .subtitle2Family,
+                                                          color: Colors.white,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .subtitle2Family),
+                                                        ),
+                                                elevation: 0,
+                                                borderSide: BorderSide(
+                                                  color: Colors.transparent,
+                                                  width: 1,
+                                                ),
                                               ),
                                             ),
-                                          ),
                                         ],
                                       ),
                                     ),
@@ -245,7 +248,8 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget>
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            profilepageMainUsersRecord!.email!,
+                                            userProfileContactsUsersRecord!
+                                                .email!,
                                             style: FlutterFlowTheme.of(context)
                                                 .subtitle2,
                                           ),
@@ -304,7 +308,7 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget>
                                                                 await launchUrl(
                                                                     Uri(
                                                                   scheme: 'tel',
-                                                                  path: profilepageMainUsersRecord!
+                                                                  path: userProfileContactsUsersRecord!
                                                                       .phoneNumber!,
                                                                 ));
                                                               },
@@ -384,7 +388,7 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget>
                                                                               CrossAxisAlignment.start,
                                                                           children: [
                                                                             Text(
-                                                                              profilepageMainUsersRecord!.phoneNumber!,
+                                                                              userProfileContactsUsersRecord!.phoneNumber!,
                                                                               style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                     fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
                                                                                     color: FlutterFlowTheme.of(context).primaryText,
@@ -420,7 +424,7 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget>
                                                             child: InkWell(
                                                               onTap: () async {
                                                                 await launchURL(
-                                                                    profilepageMainUsersRecord!
+                                                                    userProfileContactsUsersRecord!
                                                                         .whatsappChat!);
                                                               },
                                                               child: Container(
@@ -499,7 +503,7 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget>
                                                                               CrossAxisAlignment.start,
                                                                           children: [
                                                                             Text(
-                                                                              profilepageMainUsersRecord!.whatsappChat!,
+                                                                              userProfileContactsUsersRecord!.whatsappChat!,
                                                                               style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                     fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
                                                                                     color: FlutterFlowTheme.of(context).primaryText,
@@ -619,7 +623,7 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget>
                                                                             children: [
                                                                               SelectionArea(
                                                                                   child: AutoSizeText(
-                                                                                profilepageMainUsersRecord!.facebook!.maybeHandleOverflow(maxChars: 22),
+                                                                                userProfileContactsUsersRecord!.facebook!.maybeHandleOverflow(maxChars: 22),
                                                                                 maxLines: 2,
                                                                                 style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                       fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
@@ -742,7 +746,7 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget>
                                                                             children: [
                                                                               SelectionArea(
                                                                                   child: Text(
-                                                                                profilepageMainUsersRecord!.instagram!.maybeHandleOverflow(maxChars: 22),
+                                                                                userProfileContactsUsersRecord!.instagram!.maybeHandleOverflow(maxChars: 22),
                                                                                 maxLines: 2,
                                                                                 style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                       fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
@@ -812,7 +816,7 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget>
                                                                             0,
                                                                             0),
                                                                     child: Text(
-                                                                      profilepageMainUsersRecord!
+                                                                      userProfileContactsUsersRecord!
                                                                           .abount!,
                                                                       textAlign:
                                                                           TextAlign
@@ -899,7 +903,7 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget>
                             builder: (context) => InkWell(
                               onTap: () async {
                                 await Share.share(
-                                  'https://quickcardzm.com/share/${profilepageMainUsersRecord!.uid}',
+                                  'https://quickcardzm.com/share/${userProfileContactsUsersRecord!.uid}',
                                   sharePositionOrigin:
                                       getWidgetBoundingBox(context),
                                 );
@@ -935,7 +939,7 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget>
                                     ),
                                     onPressed: () async {
                                       await Share.share(
-                                        'https://quickcardzm.com/share/${profilepageMainUsersRecord!.uid}',
+                                        'https://quickcardzm.com/share/${userProfileContactsUsersRecord!.uid}',
                                         sharePositionOrigin:
                                             getWidgetBoundingBox(context),
                                       );

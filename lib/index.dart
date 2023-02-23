@@ -11,3 +11,5 @@ export 'edit_account/edit_account_widget.dart' show EditAccountWidget;
 export 'set_up_account/set_up_account_widget.dart' show SetUpAccountWidget;
 export 'set_up_account_two/set_up_account_two_widget.dart'
     show SetUpAccountTwoWidget;
+export 'user_profile_contacts/user_profile_contacts_widget.dart'
+    show UserProfileContactsWidget;

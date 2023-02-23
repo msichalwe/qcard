@@ -1,9 +1,12 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -17,11 +20,27 @@ class ScansWidget extends StatefulWidget {
   _ScansWidgetState createState() => _ScansWidgetState();
 }
 
-class _ScansWidgetState extends State<ScansWidget> {
+class _ScansWidgetState extends State<ScansWidget>
+    with TickerProviderStateMixin {
   late ScansModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
+
+  final animationsMap = {
+    'circleImageOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+      ],
+    ),
+  };
 
   @override
   void initState() {
@@ -29,6 +48,7 @@ class _ScansWidgetState extends State<ScansWidget> {
     _model = createModel(context, () => ScansModel());
 
     _model.textController ??= TextEditingController();
+
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -44,7 +64,7 @@ class _ScansWidgetState extends State<ScansWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      backgroundColor: Color(0xFF4C3FB5),
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
@@ -132,9 +152,36 @@ class _ScansWidgetState extends State<ScansWidget> {
                                     Duration(milliseconds: 2000),
                                     () => setState(() {}),
                                   ),
+                                  autofillHints: [AutofillHints.username],
                                   obscureText: false,
                                   decoration: InputDecoration(
+                                    labelStyle: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Nunito',
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.normal,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1Family),
+                                        ),
                                     hintText: 'Search...',
+                                    hintStyle: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Nunito',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryBtnText,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.normal,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1Family),
+                                        ),
                                     enabledBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
                                         color: Color(0x00000000),
@@ -299,7 +346,8 @@ class _ScansWidgetState extends State<ScansWidget> {
                                                       .photoUrl!,
                                                   fit: BoxFit.cover,
                                                 ),
-                                              ),
+                                              ).animateOnPageLoad(animationsMap[
+                                                  'circleImageOnPageLoadAnimation']!),
                                             ),
                                             Expanded(
                                               child: Container(
