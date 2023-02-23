@@ -369,81 +369,90 @@ class _UserProfileContactsWidgetState extends State<UserProfileContactsWidget>
                                                                           5,
                                                                           5,
                                                                           5),
-                                                                  child: Row(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    children: [
-                                                                      Material(
-                                                                        color: Colors
-                                                                            .transparent,
-                                                                        elevation:
-                                                                            0,
-                                                                        shape:
-                                                                            RoundedRectangleBorder(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(20),
-                                                                        ),
-                                                                        child:
-                                                                            Container(
-                                                                          width:
-                                                                              65,
-                                                                          height:
-                                                                              65,
-                                                                          decoration:
-                                                                              BoxDecoration(
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).tertiaryColor,
+                                                                  child:
+                                                                      InkWell(
+                                                                    onTap:
+                                                                        () async {
+                                                                      await launchUrl(
+                                                                          Uri(
+                                                                        scheme:
+                                                                            'tel',
+                                                                        path: userProfileContactsUsersRecord!
+                                                                            .phoneNumber!,
+                                                                      ));
+                                                                    },
+                                                                    child: Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      children: [
+                                                                        Material(
+                                                                          color:
+                                                                              Colors.transparent,
+                                                                          elevation:
+                                                                              0,
+                                                                          shape:
+                                                                              RoundedRectangleBorder(
                                                                             borderRadius:
                                                                                 BorderRadius.circular(20),
                                                                           ),
                                                                           child:
-                                                                              Align(
-                                                                            alignment:
-                                                                                AlignmentDirectional(0, 0.1),
+                                                                              Container(
+                                                                            width:
+                                                                                65,
+                                                                            height:
+                                                                                65,
+                                                                            decoration:
+                                                                                BoxDecoration(
+                                                                              color: FlutterFlowTheme.of(context).tertiaryColor,
+                                                                              borderRadius: BorderRadius.circular(20),
+                                                                            ),
                                                                             child:
-                                                                                FaIcon(
-                                                                              FontAwesomeIcons.phoneSquareAlt,
-                                                                              color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                              size: 40,
+                                                                                Align(
+                                                                              alignment: AlignmentDirectional(0, 0.1),
+                                                                              child: FaIcon(
+                                                                                FontAwesomeIcons.phoneSquareAlt,
+                                                                                color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                size: 40,
+                                                                              ),
                                                                             ),
                                                                           ),
                                                                         ),
-                                                                      ),
-                                                                      Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            25,
-                                                                            0,
-                                                                            0,
-                                                                            0),
-                                                                        child:
-                                                                            Column(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.max,
-                                                                          crossAxisAlignment:
-                                                                              CrossAxisAlignment.start,
-                                                                          children: [
-                                                                            Text(
-                                                                              userProfileContactsUsersRecord!.phoneNumber!,
-                                                                              style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                    fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
-                                                                                    color: FlutterFlowTheme.of(context).primaryText,
-                                                                                    fontSize: 20,
-                                                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
-                                                                                  ),
-                                                                            ),
-                                                                            Text(
-                                                                              'Tap here to add to contacts',
-                                                                              style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                    fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
-                                                                                    color: FlutterFlowTheme.of(context).primaryText,
-                                                                                    useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
-                                                                                  ),
-                                                                            ),
-                                                                          ],
+                                                                        Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              25,
+                                                                              0,
+                                                                              0,
+                                                                              0),
+                                                                          child:
+                                                                              Column(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.start,
+                                                                            children: [
+                                                                              Text(
+                                                                                userProfileContactsUsersRecord!.phoneNumber!,
+                                                                                style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                      fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
+                                                                                      color: FlutterFlowTheme.of(context).primaryText,
+                                                                                      fontSize: 20,
+                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
+                                                                                    ),
+                                                                              ),
+                                                                              Text(
+                                                                                'Tap here to add to contacts',
+                                                                                style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                      fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
+                                                                                      color: FlutterFlowTheme.of(context).primaryText,
+                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
+                                                                                    ),
+                                                                              ),
+                                                                            ],
+                                                                          ),
                                                                         ),
-                                                                      ),
-                                                                    ],
+                                                                      ],
+                                                                    ),
                                                                   ),
                                                                 ),
                                                               ),
