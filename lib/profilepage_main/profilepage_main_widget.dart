@@ -657,18 +657,23 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget> {
                                                                         crossAxisAlignment:
                                                                             CrossAxisAlignment.start,
                                                                         children: [
-                                                                          SelectionArea(
-                                                                              child: AutoSizeText(
-                                                                            profilepageMainUsersRecord!.facebook!,
-                                                                            maxLines:
-                                                                                2,
-                                                                            style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                  fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
-                                                                                  color: FlutterFlowTheme.of(context).primaryText,
-                                                                                  fontSize: 15,
-                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
-                                                                                ),
-                                                                          )),
+                                                                          Row(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            children: [
+                                                                              SelectionArea(
+                                                                                  child: AutoSizeText(
+                                                                                profilepageMainUsersRecord!.facebook!,
+                                                                                maxLines: 2,
+                                                                                style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                      fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
+                                                                                      color: FlutterFlowTheme.of(context).primaryText,
+                                                                                      fontSize: 15,
+                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
+                                                                                    ),
+                                                                              )),
+                                                                            ],
+                                                                          ),
                                                                           Text(
                                                                             'tap here to view facebook account',
                                                                             style: FlutterFlowTheme.of(context).bodyText1.override(
@@ -774,18 +779,23 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget> {
                                                                         crossAxisAlignment:
                                                                             CrossAxisAlignment.start,
                                                                         children: [
-                                                                          SelectionArea(
-                                                                              child: Text(
-                                                                            profilepageMainUsersRecord!.instagram!,
-                                                                            maxLines:
-                                                                                2,
-                                                                            style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                  fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
-                                                                                  color: FlutterFlowTheme.of(context).primaryText,
-                                                                                  fontSize: 15,
-                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
-                                                                                ),
-                                                                          )),
+                                                                          Row(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            children: [
+                                                                              SelectionArea(
+                                                                                  child: Text(
+                                                                                profilepageMainUsersRecord!.instagram!,
+                                                                                maxLines: 2,
+                                                                                style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                      fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
+                                                                                      color: FlutterFlowTheme.of(context).primaryText,
+                                                                                      fontSize: 15,
+                                                                                      useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
+                                                                                    ),
+                                                                              )),
+                                                                            ],
+                                                                          ),
                                                                           Text(
                                                                             'tap here to view IG',
                                                                             style: FlutterFlowTheme.of(context).bodyText1.override(
