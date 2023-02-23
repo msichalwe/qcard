@@ -2,11 +2,13 @@ import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:provider/provider.dart';
 import 'contacts_model.dart';
 export 'contacts_model.dart';
@@ -218,8 +220,8 @@ class _ContactsWidgetState extends State<ContactsWidget> {
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(5, 10, 5, 0),
-                    child: StreamBuilder<List<ContactsRecord>>(
-                      stream: queryContactsRecord(
+                    child: FutureBuilder<List<ContactsRecord>>(
+                      future: queryContactsRecordOnce(
                         parent: currentUserReference,
                         queryBuilder: (contactsRecord) => contactsRecord
                             .where('isFavourite', isEqualTo: true)
@@ -254,58 +256,86 @@ class _ContactsWidgetState extends State<ContactsWidget> {
                               return Padding(
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
-                                child: Container(
-                                  width: 100,
-                                  height: 100,
-                                  decoration: BoxDecoration(
-                                    color: Color(0x07FFFFFF),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        5, 5, 5, 5),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 5, 0, 0),
-                                          child: Container(
-                                            width: 70,
-                                            height: 70,
-                                            clipBehavior: Clip.antiAlias,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                            ),
-                                            child: Image.network(
-                                              rowContactsRecord.imageUrl!,
-                                              fit: BoxFit.cover,
-                                            ),
+                                child: StreamBuilder<UsersRecord>(
+                                  stream: UsersRecord.getDocument(
+                                      rowContactsRecord.userRef!),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50,
+                                          height: 50,
+                                          child: SpinKitRipple(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                            size: 50,
                                           ),
                                         ),
-                                        Text(
-                                          rowContactsRecord.name!,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1Family,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryBackground,
-                                                useGoogleFonts: GoogleFonts
-                                                        .asMap()
-                                                    .containsKey(
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyText1Family),
+                                      );
+                                    }
+                                    final containerUsersRecord = snapshot.data!;
+                                    return Container(
+                                      width: 100,
+                                      height: 100,
+                                      decoration: BoxDecoration(
+                                        color: Color(0x07FFFFFF),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            5, 5, 5, 5),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0, 5, 0, 0),
+                                              child: Container(
+                                                width: 70,
+                                                height: 70,
+                                                clipBehavior: Clip.antiAlias,
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: Image.network(
+                                                  containerUsersRecord
+                                                      .photoUrl!,
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
+                                            ),
+                                            AutoSizeText(
+                                              containerUsersRecord.displayName!
+                                                  .maybeHandleOverflow(
+                                                maxChars: 12,
+                                                replacement: '…',
+                                              ),
+                                              maxLines: 2,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1Family,
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .primaryBackground,
+                                                        useGoogleFonts: GoogleFonts
+                                                                .asMap()
+                                                            .containsKey(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1Family),
+                                                      ),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                  ),
+                                      ),
+                                    );
+                                  },
                                 ),
                               );
                             }),
@@ -330,138 +360,190 @@ class _ContactsWidgetState extends State<ContactsWidget> {
                       ),
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(10, 30, 0, 0),
-                        child: StreamBuilder<List<ContactsRecord>>(
-                          stream: queryContactsRecord(
-                            parent: currentUserReference,
-                          ),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 50,
-                                  height: 50,
-                                  child: SpinKitRipple(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
-                                    size: 50,
-                                  ),
-                                ),
-                              );
+                        child: PagedListView<DocumentSnapshot<Object?>?,
+                            ContactsRecord>(
+                          pagingController: () {
+                            final Query<Object?> Function(Query<Object?>)
+                                queryBuilder =
+                                (contactsRecord) => contactsRecord;
+                            if (_model.pagingController != null) {
+                              final query =
+                                  queryBuilder(ContactsRecord.collection());
+                              if (query != _model.pagingQuery) {
+                                // The query has changed
+                                _model.pagingQuery = query;
+
+                                _model.pagingController!.refresh();
+                              }
+                              return _model.pagingController!;
                             }
-                            List<ContactsRecord> listViewContactsRecordList =
-                                snapshot.data!;
-                            return ListView.builder(
-                              padding: EdgeInsets.zero,
-                              scrollDirection: Axis.vertical,
-                              itemCount: listViewContactsRecordList.length,
-                              itemBuilder: (context, listViewIndex) {
-                                final listViewContactsRecord =
-                                    listViewContactsRecordList[listViewIndex];
-                                return Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 20, 0, 0),
-                                  child: Container(
-                                    decoration: BoxDecoration(),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  10, 0, 0, 0),
-                                          child: Container(
+
+                            _model.pagingController =
+                                PagingController(firstPageKey: null);
+                            _model.pagingQuery =
+                                queryBuilder(ContactsRecord.collection());
+                            _model.pagingController!
+                                .addPageRequestListener((nextPageMarker) {
+                              queryContactsRecordPage(
+                                parent: currentUserReference,
+                                queryBuilder: (contactsRecord) =>
+                                    contactsRecord,
+                                nextPageMarker: nextPageMarker,
+                                pageSize: 25,
+                                isStream: false,
+                              ).then((page) {
+                                _model.pagingController!.appendPage(
+                                  page.data,
+                                  page.nextPageMarker,
+                                );
+                              });
+                            });
+                            return _model.pagingController!;
+                          }(),
+                          padding: EdgeInsets.zero,
+                          scrollDirection: Axis.vertical,
+                          builderDelegate:
+                              PagedChildBuilderDelegate<ContactsRecord>(
+                            // Customize what your widget looks like when it's loading the first page.
+                            firstPageProgressIndicatorBuilder: (_) => Center(
+                              child: SizedBox(
+                                width: 50,
+                                height: 50,
+                                child: SpinKitRipple(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                  size: 50,
+                                ),
+                              ),
+                            ),
+
+                            itemBuilder: (context, _, listViewIndex) {
+                              final listViewContactsRecord = _model
+                                  .pagingController!.itemList![listViewIndex];
+                              return Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                                child: Container(
+                                  decoration: BoxDecoration(),
+                                  child: StreamBuilder<UsersRecord>(
+                                    stream: UsersRecord.getDocument(
+                                        listViewContactsRecord.userRef!),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
                                             width: 50,
                                             height: 50,
-                                            clipBehavior: Clip.antiAlias,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                            ),
-                                            child: CachedNetworkImage(
-                                              imageUrl: listViewContactsRecord
-                                                  .imageUrl!,
-                                              fit: BoxFit.cover,
+                                            child: SpinKitRipple(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              size: 50,
                                             ),
                                           ),
-                                        ),
-                                        Expanded(
-                                          child: Container(
-                                            decoration: BoxDecoration(),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(10, 0, 0, 0),
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    listViewContactsRecord
-                                                        .name!,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .title3
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .title3Family,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryBtnText,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .title3Family),
-                                                        ),
-                                                  ),
-                                                  Text(
-                                                    listViewContactsRecord
-                                                        .email!,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyText1Family,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryBtnText,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1Family),
-                                                        ),
-                                                  ),
-                                                ],
+                                        );
+                                      }
+                                      final rowUsersRecord = snapshot.data!;
+                                      return Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    10, 0, 0, 0),
+                                            child: Container(
+                                              width: 50,
+                                              height: 50,
+                                              clipBehavior: Clip.antiAlias,
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: CachedNetworkImage(
+                                                imageUrl:
+                                                    rowUsersRecord.photoUrl!,
+                                                fit: BoxFit.cover,
                                               ),
                                             ),
                                           ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 15, 0),
-                                          child: Icon(
-                                            Icons.more_vert_rounded,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryBackground,
-                                            size: 24,
+                                          Expanded(
+                                            child: Container(
+                                              decoration: BoxDecoration(),
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(10, 0, 0, 0),
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      rowUsersRecord
+                                                          .displayName!,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .title3
+                                                              .override(
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .title3Family,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryBtnText,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .title3Family),
+                                                              ),
+                                                    ),
+                                                    Text(
+                                                      rowUsersRecord.email!,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1
+                                                              .override(
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1Family,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryBtnText,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .bodyText1Family),
+                                                              ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 0, 15, 0),
+                                            child: Icon(
+                                              Icons.more_vert_rounded,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryBackground,
+                                              size: 24,
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    },
                                   ),
-                                );
-                              },
-                            );
-                          },
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       ),
                     ),

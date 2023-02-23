@@ -1,3 +1,4 @@
+import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -147,7 +148,7 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget> {
                             builder: (context) => InkWell(
                               onTap: () async {
                                 await Share.share(
-                                  'I just scanned ${profilepageMainUsersRecord!.displayName} check out his there profile here com.chalotek.quickcard/mainprofilepage',
+                                  'https://quickcardzm.com/share/${profilepageMainUsersRecord!.uid}',
                                   sharePositionOrigin:
                                       getWidgetBoundingBox(context),
                                 );
@@ -243,8 +244,19 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget> {
                                                 .title3,
                                           ),
                                           FFButtonWidget(
-                                            onPressed: () {
-                                              print('Button pressed ...');
+                                            onPressed: () async {
+                                              final contactsCreateData =
+                                                  createContactsRecordData(
+                                                userRef:
+                                                    profilepageMainUsersRecord!
+                                                        .reference,
+                                                updatedAt: getCurrentTimestamp,
+                                                addedAt: getCurrentTimestamp,
+                                              );
+                                              await ContactsRecord.createDoc(
+                                                      profilepageMainUsersRecord!
+                                                          .reference)
+                                                  .set(contactsCreateData);
                                             },
                                             text: 'Add contact',
                                             options: FFButtonOptions(
