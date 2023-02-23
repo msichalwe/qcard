@@ -1,5 +1,4 @@
 import '../auth/auth_util.dart';
-import '../backend/push_notifications/push_notifications_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -593,24 +592,9 @@ class _AccountWidgetState extends State<AccountWidget> {
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
-                  child: InkWell(
-                    onLongPress: () async {
-                      triggerPushNotification(
-                        notificationTitle: 'Secret Application signing 😁😁😁',
-                        notificationText:
-                            'This application was developed by Mwansa Yona Sichalwe 👌🏾 ',
-                        notificationImageUrl:
-                            'https://scontent-jnb1-1.xx.fbcdn.net/v/t1.6435-9/84330654_2744844085552219_7759151422892933120_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeHD77fS4npqf9saKVAXqX76vcQU3oiROle9xBTeiJE6VwOjgL3Gt9saYe7nVZKif6M4VIxo4Nv6SXB2rA1xeh8q&_nc_ohc=yq2iltwLlTUAX85WvPl&_nc_ht=scontent-jnb1-1.xx&oh=00_AfCUnUHH3OzrBqrL9uAFP-fejaRrgXsrk1umr1i7HLQNLQ&oe=64141B72',
-                        notificationSound: 'default',
-                        userRefs: [currentUserReference!],
-                        initialPageName: 'homepage',
-                        parameterData: {},
-                      );
-                    },
-                    child: Text(
-                      'Version 1.0.0',
-                      style: FlutterFlowTheme.of(context).bodyText1,
-                    ),
+                  child: Text(
+                    'Version 1.0.0',
+                    style: FlutterFlowTheme.of(context).bodyText1,
                   ),
                 ),
               ],
