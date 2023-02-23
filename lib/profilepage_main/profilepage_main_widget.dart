@@ -257,6 +257,26 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget> {
                                                       profilepageMainUsersRecord!
                                                           .reference)
                                                   .set(contactsCreateData);
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    'You have successfully added ${profilepageMainUsersRecord!.displayName} to your contacts 😁',
+                                                    style: TextStyle(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryText,
+                                                    ),
+                                                  ),
+                                                  duration: Duration(
+                                                      milliseconds: 4000),
+                                                  backgroundColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primaryBackground,
+                                                ),
+                                              );
                                             },
                                             text: 'Add contact',
                                             options: FFButtonOptions(
