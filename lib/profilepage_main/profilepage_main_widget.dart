@@ -189,8 +189,7 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget>
                                       .secondaryBackground,
                                   icon: Icon(
                                     Icons.arrow_back_rounded,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
+                                    color: Colors.black,
                                     size: 20,
                                   ),
                                   onPressed: () async {
@@ -231,10 +230,9 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget>
                                         buttonSize: 40,
                                         fillColor: FlutterFlowTheme.of(context)
                                             .secondaryBackground,
-                                        icon: Icon(
-                                          Icons.ios_share,
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
+                                        icon: FaIcon(
+                                          FontAwesomeIcons.shareAlt,
+                                          color: Colors.black,
                                           size: 20,
                                         ),
                                         onPressed: () async {
