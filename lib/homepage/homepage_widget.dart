@@ -38,7 +38,9 @@ class _HomepageWidgetState extends State<HomepageWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       if (valueOrDefault<bool>(currentUserDocument?.accountUpdated, false)) {
-        Navigator.pop(context);
+        await requestPermission(notificationsPermission);
+        await requestPermission(locationPermission);
+        await requestPermission(cameraPermission);
       } else {
         if (Navigator.of(context).canPop()) {
           context.pop();
@@ -49,9 +51,6 @@ class _HomepageWidgetState extends State<HomepageWidget> {
       }
 
       await requestPermission(photoLibraryPermission);
-      await requestPermission(notificationsPermission);
-      await requestPermission(locationPermission);
-      await requestPermission(cameraPermission);
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
