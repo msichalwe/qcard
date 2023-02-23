@@ -40,18 +40,12 @@ class _HomepageWidgetState extends State<HomepageWidget> {
       if (valueOrDefault<bool>(currentUserDocument?.accountUpdated, false)) {
         Navigator.pop(context);
       } else {
-        if (currentUserEmail != null && currentUserEmail != '') {
-          if (Navigator.of(context).canPop()) {
-            context.pop();
-          }
-          context.pushNamedAuth('setUpAccount', mounted);
-
-          return;
-        } else {
-          GoRouter.of(context).prepareAuthEvent();
-          await signOut();
-          return;
+        if (Navigator.of(context).canPop()) {
+          context.pop();
         }
+        context.pushNamed('setUpAccount');
+
+        return;
       }
 
       await requestPermission(photoLibraryPermission);
