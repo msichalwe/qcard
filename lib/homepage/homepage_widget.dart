@@ -216,8 +216,7 @@ class _HomepageWidgetState extends State<HomepageWidget> {
                           );
 
                           _shouldSetState = true;
-                          if (_model.userData != null &&
-                              _model.userData != '') {
+                          if (_model.userData != '-1') {
                             final scansCreateData = createScansRecordData(
                               scannedBy: currentUserReference,
                               scannedAt: getCurrentTimestamp,
