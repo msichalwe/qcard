@@ -244,100 +244,137 @@ class _ScansWidgetState extends State<ScansWidget> {
                                 return Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0, 20, 0, 0),
-                                  child: Container(
-                                    decoration: BoxDecoration(),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  10, 0, 0, 0),
-                                          child: Container(
+                                  child: StreamBuilder<List<UsersRecord>>(
+                                    stream: queryUsersRecord(
+                                      queryBuilder: (usersRecord) =>
+                                          usersRecord.where('uid',
+                                              isEqualTo: listViewScansRecord
+                                                  .scanedUserId),
+                                      singleRecord: true,
+                                    ),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
                                             width: 50,
                                             height: 50,
-                                            clipBehavior: Clip.antiAlias,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                            ),
-                                            child: Image.network(
-                                              listViewScansRecord.userImage!,
-                                              fit: BoxFit.cover,
+                                            child: SpinKitRipple(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              size: 50,
                                             ),
                                           ),
-                                        ),
-                                        Expanded(
-                                          child: Container(
-                                            decoration: BoxDecoration(),
-                                            child: Padding(
+                                        );
+                                      }
+                                      List<UsersRecord>
+                                          containerUsersRecordList =
+                                          snapshot.data!;
+                                      // Return an empty Container when the item does not exist.
+                                      if (snapshot.data!.isEmpty) {
+                                        return Container();
+                                      }
+                                      final containerUsersRecord =
+                                          containerUsersRecordList.isNotEmpty
+                                              ? containerUsersRecordList.first
+                                              : null;
+                                      return Container(
+                                        decoration: BoxDecoration(),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Padding(
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(10, 0, 0, 0),
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    listViewScansRecord
-                                                        .userName!,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .title3
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .title3Family,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryBtnText,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .title3Family),
-                                                        ),
-                                                  ),
-                                                  Text(
-                                                    'scanned on ${dateTimeFormat('MMMEd', listViewScansRecord.scannedAt)}at ${dateTimeFormat('Hm', listViewScansRecord.scannedAt)}',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyText1Family,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryBtnText,
-                                                          useGoogleFonts: GoogleFonts
-                                                                  .asMap()
-                                                              .containsKey(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1Family),
-                                                        ),
-                                                  ),
-                                                ],
+                                              child: Container(
+                                                width: 50,
+                                                height: 50,
+                                                clipBehavior: Clip.antiAlias,
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: Image.network(
+                                                  containerUsersRecord!
+                                                      .photoUrl!,
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
                                             ),
-                                          ),
+                                            Expanded(
+                                              child: Container(
+                                                decoration: BoxDecoration(),
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(10, 0, 0, 0),
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        containerUsersRecord!
+                                                            .displayName!,
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .title3
+                                                                .override(
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .title3Family,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryBtnText,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .title3Family),
+                                                                ),
+                                                      ),
+                                                      Text(
+                                                        'scanned on ${dateTimeFormat('MMMEd', listViewScansRecord.scannedAt)}at ${dateTimeFormat('Hm', listViewScansRecord.scannedAt)}',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1
+                                                                .override(
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1Family,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryBtnText,
+                                                                  useGoogleFonts: GoogleFonts
+                                                                          .asMap()
+                                                                      .containsKey(
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .bodyText1Family),
+                                                                ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0, 0, 15, 0),
+                                              child: Icon(
+                                                Icons.more_vert_rounded,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryBackground,
+                                                size: 24,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 15, 0),
-                                          child: Icon(
-                                            Icons.more_vert_rounded,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryBackground,
-                                            size: 24,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                      );
+                                    },
                                   ),
                                 );
                               },
