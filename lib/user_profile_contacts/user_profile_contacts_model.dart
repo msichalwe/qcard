@@ -18,6 +18,10 @@ import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class UserProfileContactsModel extends FlutterFlowModel {
+  ///  State fields for stateful widgets in this page.
+
+  String currentPageLink = '';
+
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {}

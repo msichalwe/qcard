@@ -938,8 +938,21 @@ class _UserProfileContactsWidgetState extends State<UserProfileContactsWidget>
                                       size: 20,
                                     ),
                                     onPressed: () async {
+                                      _model.currentPageLink =
+                                          await generateCurrentPageLink(
+                                        context,
+                                        title:
+                                            '${userProfileContactsUsersRecord!.displayName}\'s Contact Card',
+                                        imageUrl:
+                                            userProfileContactsUsersRecord!
+                                                .photoUrl,
+                                        description:
+                                            'Hey check out ${userProfileContactsUsersRecord!.displayName}\'s contact card on Quickcard. Get contact information quick and easy.',
+                                        isShortLink: false,
+                                      );
+
                                       await Share.share(
-                                        'https://quickcardzm.com/share/${userProfileContactsUsersRecord!.uid}',
+                                        _model.currentPageLink,
                                         sharePositionOrigin:
                                             getWidgetBoundingBox(context),
                                       );

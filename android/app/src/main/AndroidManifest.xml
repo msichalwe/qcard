@@ -69,7 +69,8 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="quickcard" android:host="quickcard.com" />
+                <data android:scheme="http" android:host="quickcard.page.link" />
+                <data android:scheme="https" />
             </intent-filter>
 
         </activity>

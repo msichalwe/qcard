@@ -37,10 +37,10 @@
         <key>CFBundleTypeRole</key>
         <string>Editor</string>
         <key>CFBundleURLName</key>
-        <string>quickcard.com</string>
+        <string>qui_ck_ca_rd</string>
         <key>CFBundleURLSchemes</key>
         <array>
-        <string>quickcard</string>
+        <string>com.panga.quickcard</string>
         </array>
         </dict>
     </array>

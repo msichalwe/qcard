@@ -9,6 +9,8 @@ import '../../backend/backend.dart';
 
 import '../../auth/firebase_user_provider.dart';
 
+import '../../backend/firebase_dynamic_links/firebase_dynamic_links.dart'
+    show DynamicLinksHandler;
 import '../../index.dart';
 import '../../main.dart';
 import '../lat_lng.dart';
@@ -17,6 +19,8 @@ import 'serialization_util.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
+export '../../backend/firebase_dynamic_links/firebase_dynamic_links.dart'
+    show generateCurrentPageLink;
 
 const kTransitionInfoKey = '__transition_info__';
 
@@ -71,6 +75,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       errorBuilder: (context, _) =>
           appStateNotifier.loggedIn ? HomepageWidget() : LoginpageWidget(),
+      navigatorBuilder: (_, __, child) => DynamicLinksHandler(child: child),
       routes: [
         FFRoute(
           name: '_initialize',
@@ -370,7 +375,7 @@ class TransitionInfo {
 
   static TransitionInfo appDefault() => TransitionInfo(
         hasTransition: true,
-        transitionType: PageTransitionType.fade,
+        transitionType: PageTransitionType.rightToLeft,
         duration: Duration(milliseconds: 300),
       );
 }

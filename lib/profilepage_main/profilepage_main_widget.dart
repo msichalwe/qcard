@@ -934,8 +934,20 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget>
                                       size: 20,
                                     ),
                                     onPressed: () async {
+                                      _model.currentPageLink =
+                                          await generateCurrentPageLink(
+                                        context,
+                                        title:
+                                            '${profilepageMainUsersRecord!.displayName}\'s Contact Card',
+                                        imageUrl: profilepageMainUsersRecord!
+                                            .photoUrl,
+                                        description:
+                                            'Hey check out ${profilepageMainUsersRecord!.displayName}\'s contact card on Quickcard. Get contact information quick and easy.',
+                                        isShortLink: false,
+                                      );
+
                                       await Share.share(
-                                        'https://quickcardzm.com/share/${profilepageMainUsersRecord!.uid}',
+                                        _model.currentPageLink,
                                         sharePositionOrigin:
                                             getWidgetBoundingBox(context),
                                       );
