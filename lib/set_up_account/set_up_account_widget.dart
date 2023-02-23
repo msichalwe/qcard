@@ -617,10 +617,15 @@ class _SetUpAccountWidgetState extends State<SetUpAccountWidget> {
                     padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        GoRouter.of(context).prepareAuthEvent();
-                        await signOut();
+                        final usersUpdateData = createUsersRecordData(
+                          phoneNumber: _model.phoneNumberController.text,
+                          abount: _model.myBioController.text,
+                          alternetEmail:
+                              _model.alternatEmailAddressController.text,
+                        );
+                        await currentUserReference!.update(usersUpdateData);
 
-                        context.goNamedAuth('loginpage', mounted);
+                        context.pushNamed('setUpAccountTwo');
                       },
                       text: 'Next step',
                       options: FFButtonOptions(
