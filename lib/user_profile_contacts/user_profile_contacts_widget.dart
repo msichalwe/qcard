@@ -6,6 +6,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -114,15 +115,50 @@ class _UserProfileContactsWidgetState extends State<UserProfileContactsWidget>
               child: Stack(
                 alignment: AlignmentDirectional(0, -1),
                 children: [
-                  Align(
-                    alignment: AlignmentDirectional(0, -1),
-                    child: Image.network(
-                      userProfileContactsUsersRecord!.photoUrl!,
-                      width: double.infinity,
-                      height: 300,
-                      fit: BoxFit.cover,
-                    ).animateOnPageLoad(
-                        animationsMap['imageOnPageLoadAnimation']!),
+                  Stack(
+                    children: [
+                      Align(
+                        alignment: AlignmentDirectional(0, -1),
+                        child: CachedNetworkImage(
+                          imageUrl: userProfileContactsUsersRecord!.photoUrl!,
+                          width: MediaQuery.of(context).size.width,
+                          height: 300,
+                          fit: BoxFit.fitWidth,
+                        ).animateOnPageLoad(
+                            animationsMap['imageOnPageLoadAnimation']!),
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: 300,
+                        decoration: BoxDecoration(
+                          color: Color(0xB7000000),
+                        ),
+                      ),
+                      Align(
+                        alignment: AlignmentDirectional(-0.02, -0.76),
+                        child: Container(
+                          width: 150,
+                          height: 150,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image.network(
+                                userProfileContactsUsersRecord!.photoUrl!,
+                                width: 100,
+                                height: 100,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   SingleChildScrollView(
                     child: Column(
@@ -948,7 +984,6 @@ class _UserProfileContactsWidgetState extends State<UserProfileContactsWidget>
                                                 .photoUrl,
                                         description:
                                             'Hey check out ${userProfileContactsUsersRecord!.displayName}\'s contact card on Quickcard. Get contact information quick and easy.',
-                                        isShortLink: false,
                                       );
 
                                       await Share.share(

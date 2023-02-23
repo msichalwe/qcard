@@ -79,7 +79,7 @@ class _HomepageWidgetState extends State<HomepageWidget> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 35, 0, 0),
                       child: Container(
                         width: MediaQuery.of(context).size.width * 0.8,
                         decoration: BoxDecoration(
