@@ -663,12 +663,13 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget> {
                                                                             children: [
                                                                               SelectionArea(
                                                                                   child: AutoSizeText(
-                                                                                profilepageMainUsersRecord!.facebook!,
+                                                                                profilepageMainUsersRecord!.facebook!.maybeHandleOverflow(maxChars: 22),
                                                                                 maxLines: 2,
                                                                                 style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                       fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
                                                                                       color: FlutterFlowTheme.of(context).primaryText,
                                                                                       fontSize: 15,
+                                                                                      fontWeight: FontWeight.bold,
                                                                                       useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
                                                                                     ),
                                                                               )),
@@ -785,12 +786,13 @@ class _ProfilepageMainWidgetState extends State<ProfilepageMainWidget> {
                                                                             children: [
                                                                               SelectionArea(
                                                                                   child: Text(
-                                                                                profilepageMainUsersRecord!.instagram!,
+                                                                                profilepageMainUsersRecord!.instagram!.maybeHandleOverflow(maxChars: 22),
                                                                                 maxLines: 2,
                                                                                 style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                       fontFamily: FlutterFlowTheme.of(context).bodyText1Family,
                                                                                       color: FlutterFlowTheme.of(context).primaryText,
                                                                                       fontSize: 15,
+                                                                                      fontWeight: FontWeight.bold,
                                                                                       useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyText1Family),
                                                                                     ),
                                                                               )),
